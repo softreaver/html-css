@@ -1,0 +1,114 @@
+body
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: bisque;
+}
+
+header
+{
+    display: flex;
+}
+
+header>h1
+{
+    flex-grow: 1
+}
+
+section
+{
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+aside *{
+    display: inline-block;
+}
+
+aside
+{
+    color: white;
+    padding: 1rem;
+    min-width: 200px;
+    background-color: darkslategrey;
+}
+
+footer
+{
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 100vw;
+}
+
+footer>div#pied1
+{
+    background-color: darkorchid;
+    min-width: 200px;
+}
+
+footer>div#pied2
+{
+    background-color: darkgoldenrod;
+    flex-grow: 1;
+}
+
+footer>div#pied3
+{
+    background-color: brown;
+    min-width: 200px;
+}
+
+div#pied3>ul>li>a
+{
+    color: darkviolet;
+    padding: 0;
+}
+
+div#pied3>ul>li>a:hover
+{
+    color: rgb(81, 8, 112);
+    padding: 8px;
+}
+
+ul.imgBlock>li
+{
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.menu
+{
+    display: flex;
+    flex-direction: row;
+}
+
+ul.menu>li
+{
+    list-style-type: none;
+    padding: 10px;
+}
+
+@media screen and (max-width: 700px){
+    section{
+        flex-direction: column;
+    }
+
+    footer{
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    #pied2{
+        order: 1;
+    }
+
+    #pied1{
+        order: 2;
+    }
+
+    .expanser{
+        flex-grow: 1;
+    }
+}

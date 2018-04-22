@@ -1,0 +1,143 @@
+*{
+    box-sizing: border-box;
+}
+$site-width: 950px;
+$min-site-width: 400px;
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-width: $min-site-width;
+    min-height: 99.5vh;
+    margin: auto;
+
+    div.content{margin: auto;}
+}
+
+header{
+    background-color: purple;
+
+    * {color: white; text-decoration: none;}
+
+    &>div.content{
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        max-width: $site-width;
+    }
+
+    .navigation{
+        position: absolute;
+        background-color: palevioletred;
+        bottom: 0;
+        margin-top: 2em;
+        a{
+            margin: 0.3em;
+        }
+    }
+
+    .logIn{
+        height: 40px;
+        padding: 0.5em;
+        background-color: palevioletred;
+        margin-top: 1em;
+
+        input{
+            width: 130px;
+            background-color: palevioletred;
+            border: solid black 0.15em;
+
+            &::placeholder{
+                color: white;
+            }
+        }
+
+        button{
+            background-color: rgb(47, 165, 98);
+            border: none;
+            text-decoration: none;
+        }
+    }
+}
+
+#selection{
+    flex-grow: 1;
+    background-color: rgb(230, 117, 13);
+
+    * {color: white;}
+    &>div.content{
+        display: flex;
+        max-width: $site-width;
+    }
+}
+
+#article{
+    flex-grow: 1;
+    &>div.content{
+        display: flex;
+        max-width: $site-width;
+    }
+
+    .photo{
+        position: relative;
+
+        figcaption{
+            position: absolute;
+            bottom: 0;
+            left:0; right: 0;
+            color: white;
+            background-color: rgba(43, 42, 42, 0.7);
+        }
+    }
+}
+
+footer{
+    background-color: rgba(201, 12, 12, 0.856);
+    &>div.content{
+        display: flex;
+        justify-content: space-between;
+        max-width: $site-width;
+        #credits{
+            width: 50%;
+        }
+        #externalLinks{
+            width: 50%;
+            ul{padding-left: 0}
+            li{list-style-type: none;}
+        }
+    }
+}
+
+
+@media screen and (max-width: $site-width - 100px)
+{
+    header>div.content,
+    #selection>div.content,
+    #article>div.content,
+    footer>div.content{
+        flex-direction: column;
+        text-align: center;
+        .logIn{
+            margin: auto;
+        }
+
+        .navigation{
+            position: static;
+            margin: auto;
+            order: 1;
+            margin-top: 1em;
+        }
+
+        .photo{
+            width: 90vw;
+            &>img{
+                width: 90vw;
+            }
+        }
+
+        #credits,
+        #externalLinks{
+            width: auto;
+        }
+    }
+}

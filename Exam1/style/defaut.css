@@ -1,0 +1,156 @@
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 400px;
+  min-height: 99.5vh;
+  margin: auto; }
+  body div.content {
+    margin: auto; }
+
+header {
+  background-color: purple; }
+  header * {
+    color: white;
+    text-decoration: none; }
+  header > div.content {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    max-width: 950px; }
+  header .navigation {
+    position: absolute;
+    background-color: palevioletred;
+    bottom: 0;
+    margin-top: 2em; }
+    header .navigation a {
+      margin: 0.3em; }
+  header .logIn {
+    height: 40px;
+    padding: 0.5em;
+    background-color: palevioletred;
+    margin-top: 1em; }
+    header .logIn input {
+      width: 130px;
+      background-color: palevioletred;
+      border: solid black 0.15em; }
+      header .logIn input::-webkit-input-placeholder {
+        color: white; }
+      header .logIn input:-ms-input-placeholder {
+        color: white; }
+      header .logIn input::-ms-input-placeholder {
+        color: white; }
+      header .logIn input::placeholder {
+        color: white; }
+    header .logIn button {
+      background-color: #2fa562;
+      border: none;
+      text-decoration: none; }
+
+#selection {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  background-color: #e6750d; }
+  #selection * {
+    color: white; }
+  #selection > div.content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    max-width: 950px; }
+
+#article {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1; }
+  #article > div.content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    max-width: 950px; }
+  #article .photo {
+    position: relative; }
+    #article .photo figcaption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: white;
+      background-color: rgba(43, 42, 42, 0.7); }
+
+footer {
+  background-color: rgba(201, 12, 12, 0.856); }
+  footer > div.content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    max-width: 950px; }
+    footer > div.content #credits {
+      width: 50%; }
+    footer > div.content #externalLinks {
+      width: 50%; }
+      footer > div.content #externalLinks ul {
+        padding-left: 0; }
+      footer > div.content #externalLinks li {
+        list-style-type: none; }
+
+@media screen and (max-width: 850px) {
+  header > div.content,
+  #selection > div.content,
+  #article > div.content,
+  footer > div.content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    text-align: center; }
+    header > div.content .logIn,
+    #selection > div.content .logIn,
+    #article > div.content .logIn,
+    footer > div.content .logIn {
+      margin: auto; }
+    header > div.content .navigation,
+    #selection > div.content .navigation,
+    #article > div.content .navigation,
+    footer > div.content .navigation {
+      position: static;
+      margin: auto;
+      -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+      order: 1;
+      margin-top: 1em; }
+    header > div.content .photo,
+    #selection > div.content .photo,
+    #article > div.content .photo,
+    footer > div.content .photo {
+      width: 90vw; }
+      header > div.content .photo > img,
+      #selection > div.content .photo > img,
+      #article > div.content .photo > img,
+      footer > div.content .photo > img {
+        width: 90vw; }
+    header > div.content #credits,
+    header > div.content #externalLinks,
+    #selection > div.content #credits,
+    #selection > div.content #externalLinks,
+    #article > div.content #credits,
+    #article > div.content #externalLinks,
+    footer > div.content #credits,
+    footer > div.content #externalLinks {
+      width: auto; } }

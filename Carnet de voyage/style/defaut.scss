@@ -1,0 +1,154 @@
+*{
+    box-sizing: border-box;
+}
+
+$site-width: 800px;
+
+body{
+    display: flex;
+    flex-direction: column;
+    width: $site-width;
+    margin: auto;
+    background-color: rgb(255, 218, 175);
+}
+
+header{
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    background: bottom repeat-x url("../images/separateur.png");
+    margin-bottom: 2em;
+    height: 160px;
+
+    nav{
+        position: absolute;
+        bottom: 2px;
+        background-color: rgb(161, 31, 161);
+        height: 2em;
+
+        a{ 
+            margin-left: 1em;
+            margin-right: 1em;
+            margin-top: 0.3em;
+            display: inline-block;
+        }
+    }
+
+    form{
+        background-color: purple;
+        height: 45px;
+        padding: 0.5em;
+
+        input{ width: 150px; }
+    }
+}
+
+figure{
+    position: relative;
+    width: $site-width;
+    margin: 0;
+    box-shadow: rgb(70, 66, 66) 2px 4px 2px;
+
+    img{
+        display: block;
+    }
+
+    figcaption{
+        color: white;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 33px;
+        background-color: rgba(70, 66, 66, 0.7);
+
+        padding-top: 0.3em;
+        padding-left: 0.3em;
+    }
+}
+
+.article{
+    display: flex;
+    margin-top: 1rem;
+
+    article{
+        text-align: justify;
+        padding-right: 2em;
+    }
+
+    aside{
+        position: relative;
+        background-color: rgb(82, 79, 79);
+        border-radius: 20px;
+        box-shadow: rgb(70, 66, 66) 2px 4px 2px;
+        text-align: center;
+        padding: 0.5em;
+
+        &::before{
+            content: url("../images/bulle.png");
+            position: absolute;
+            left: -12px;
+            top: 10em;
+        }
+
+        p{
+            text-align: justify;
+        }
+    }
+}
+
+footer{
+    display: flex;
+    background-color: rgb(38, 80, 207);
+    border-radius: 15px;
+    box-shadow: rgb(38, 80, 207) 2px 4px;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+
+    div{
+        width: 50%;
+    }
+
+    li{ list-style-type: none; }
+}
+
+@media screen and (max-width: $site-width){
+    figure,
+    header,
+    body{
+        width: 99vw;
+        
+        &>img{
+            width: 99vw;
+        }
+    }
+
+    header{
+        flex-direction: column;
+
+        a   { order: 1; }
+        form{ order: 2; }
+        nav { order: 3; position: static; }
+    }
+
+    .article,
+    footer{
+        flex-direction: column;
+
+        p{
+            padding: 1em;
+        }
+
+        article,
+        aside{
+            width: 99vw;
+        }
+    }
+
+    footer div{
+        width: auto;
+        margin: auto;
+        text-align: center;
+    }
+}

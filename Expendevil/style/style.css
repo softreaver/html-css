@@ -1,0 +1,45 @@
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+#main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+#banner .head li {
+  list-style-type: none; }
+
+#banner .head li > a {
+  display: block;
+  float: left;
+  width: 125px;
+  height: 150px;
+  margin: 0.2rem;
+  -webkit-transition: background-position 0.3s ease-out;
+  -o-transition: background-position 0.3s ease-out;
+  transition: background-position 0.3s ease-out; }
+  #banner .head li > a#perso1 {
+    background: url("../images/ex-2-posters.jpg") 0px 0 no-repeat; }
+    #banner .head li > a#perso1:hover {
+      background: url("../images/ex-2-posters.jpg") 0px -267px no-repeat; }
+  #banner .head li > a#perso2 {
+    background: url("../images/ex-2-posters.jpg") -125px 0 no-repeat; }
+    #banner .head li > a#perso2:hover {
+      background: url("../images/ex-2-posters.jpg") -125px -267px no-repeat; }
+  #banner .head li > a#perso3 {
+    background: url("../images/ex-2-posters.jpg") -250px 0 no-repeat; }
+    #banner .head li > a#perso3:hover {
+      background: url("../images/ex-2-posters.jpg") -250px -267px no-repeat; }
+  #banner .head li > a#perso4 {
+    background: url("../images/ex-2-posters.jpg") -375px 0 no-repeat; }
+    #banner .head li > a#perso4:hover {
+      background: url("../images/ex-2-posters.jpg") -375px -267px no-repeat; }
+  #banner .head li > a#perso5 {
+    background: url("../images/ex-2-posters.jpg") -500px 0 no-repeat; }
+    #banner .head li > a#perso5:hover {
+      background: url("../images/ex-2-posters.jpg") -500px -267px no-repeat; }

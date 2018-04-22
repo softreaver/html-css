@@ -1,0 +1,31 @@
+* {box-sizing: border-box;}
+
+#main {
+    display: flex;
+    flex-direction: column;
+}
+
+#banner .head li {list-style-type: none;}
+
+#banner .head li>a{
+    display:            block;
+    float:              left;
+    width:              125px;
+    height:             150px;
+    margin:             0.2rem;
+    transition: background-position 0.3s ease-out;
+
+
+    @for $i from 1 through 5{
+        $p-x: (-125 * ($i - 1));
+        &#perso#{$i}{
+            background: url("../images/ex-2-posters.jpg") #{$p-x}px 0 no-repeat;
+
+            &:hover{
+                background: url("../images/ex-2-posters.jpg") #{$p-x}px -267px no-repeat;
+            }
+        }
+    }
+    
+}
+

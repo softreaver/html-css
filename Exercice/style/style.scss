@@ -1,0 +1,105 @@
+$site-width: 950px;
+$min-site-width: 400px;
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+a{
+    text-decoration-line: none;
+    font-weight: bold;
+
+    &:hover{
+        text-decoration-line: underline;
+    }
+}
+
+.content{
+    display:flex;
+    position: relative;
+    width: $site-width;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.pink{background-color: pink;}
+
+.purple{background-color: rgb(197, 6, 197);}
+
+.darkPurple{background-color: rgb(99, 6, 99);}
+
+.green{background-color: rgb(107, 223, 107);}
+
+.img{
+    background-image: url("../images/image01.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#greatPannel{
+    background-image: url("../images/image02.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+header{
+    background-image: url("../images/masthead.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 900px;
+
+    * {color: white;}
+
+    #mainTitle{
+        position: absolute;
+        top: 3rem;
+    }
+
+    #header-subtitle{
+        position: relative;
+        top: 350px;
+
+        h1{
+            font-size: 50px;
+        }
+
+        a{
+            display: inline-block;
+            margin-top: 2em;
+        }
+    }
+
+    .iphone{
+        position: relative;
+        top: 200px;
+    }
+}
+
+#pannels{
+
+    * {color: white;}
+
+    p{
+        margin-top: 1em;
+        margin-bottom: 1em;
+        line-height: 2em;
+    }
+
+
+    #block{
+        display: flex;
+        flex-wrap: wrap;
+        width: 1500px;
+        overflow-x: visible;
+
+        .pannel{
+            padding: 0.5em;
+            width: 25%;
+        }
+
+        #greatPannel{
+            width: 50%;
+        }
+    }
+}
