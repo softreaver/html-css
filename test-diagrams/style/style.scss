@@ -1,8 +1,80 @@
-.pie{
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: yellowgreen;
+/**
+ * Static pie charts
+ */
 
-    background-image: linear-gradient(to right, transparent 50%, #655 0);
+$PI: 3.14;
+
+*{
+    box-sizing: border-box;
 }
 
+body {
+    background-color: violet;
+} 
+
+
+.pie {
+	display: inline-block;
+	position: relative;
+	width: 100px;
+	line-height: 100px;
+	border-radius: 50%;
+	background: yellowgreen;
+	background-image: linear-gradient(to right, transparent 50%, #655 0);
+	color: transparent;
+	text-align: center;
+}
+
+@keyframes spin {
+	to { transform: rotate(.5turn); }
+}
+@keyframes bg {
+	50% { background: #655; }
+}   
+
+.pie::before {
+	content: '';
+	position: absolute;
+	top: 0; left: 50%;
+	width: 50%; height: 100%;
+	border-radius: 0 100% 100% 0 / 50%;
+	background-color: inherit;
+	transform-origin: left;
+	animation: spin 50s linear infinite, bg 100s step-end infinite;  //Démarrage des deux animations en même temps en boucle infinie
+	animation-play-state: paused;
+	animation-delay: inherit; //Permet de récupérer la valeurs de l'attribut HTML
+}
+
+//-------------------------
+// Méthode avec SVG:
+
+circle{
+    position: absolute;
+    top: 0; left: 0;
+    $circo: 2*$PI*25;
+    $percent: 50;
+    fill: none;
+    stroke: #655;
+    stroke-width: 50;
+
+    @keyframes fillup{
+        to{ stroke-dasharray: $circo $circo; }
+    }
+
+    stroke-dasharray: (($percent/100)*$circo) ($circo);
+}
+
+.offset{
+    $circo: 2*$PI*25;
+    stroke: rgb(161, 124, 76);
+    stroke-dashoffset: -(0.5*$circo);
+    stroke-dasharray: (0.2*$circo) ($circo);
+}
+
+// voir svg viewbox
+svg{
+    position: relative;
+    transform: rotate(-90deg);
+    background-color: yellowgreen;
+    border-radius: 50%;
+}

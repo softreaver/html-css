@@ -1,0 +1,11 @@
+[class*=col-] {
+  background-color: aquamarine;
+  border-radius: 5px;
+  text-align: center;
+  border: 2px solid; }
+
+article {
+  line-height: 200px; }
+
+aside {
+  line-height: 100px; }
