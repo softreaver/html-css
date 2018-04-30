@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<!-- Permet de définir que le site est en francais et que ça se lit de gauche à droite (cf : dir=ltr) -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Site officiel de la ICCJ - Une start up innovante dans le domaine des nouvelles technologies"
+    />
+    <meta name="author" content="Christopher MILAZZO" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ICCJ</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="content">
+            <a href="index.html" id="mainTitle" title="Accueil du site">
+                <h1 id="mainTitle">ICCJ</h1>
+                <p>Bienvenue</p>
+            </a>
+
+            <form action="login">
+                <input class="pseudo" type="text" name="_pseudo" placeholder="login" required>
+                <input class="password" type="password" name="_password" placeholder="password" required>
+                <button class="btn green">Se connecter</button>
+            </form>
+
+            <nav class="navigation">
+                <a href="index.html">Accueil</a>
+                <a href="#">Nos projets</a>
+                <a href="#">Nos articles</a>
+                <a href="#">Nos partenaires</a>
+                <a href="mailto:les-copains@iccj.com">contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="presentation">
+        <div class="content">
+            <article>
+                <h2>La ICCJ Recrute en masse !!</h2>
+                <p>Venez vous présenter dans la section
+                    <span class="italic">contact</span>. nous ne mordont pas et sommes parfaitement
+                    <span class="italic">normaux</span>
+                    (cf. trombinoscope plus bas).</p>
+            </article>
+
+            <article>
+                <h2>Qui sommes nous</h2>
+                <p>Nous sommes une bande de copains qui aimons les ordinateurs et qui voulions avoir notre start up.
+                </p>
+                <h2>Que faisons nous</h2>
+                <p>.... on joue au bayfoot .....
+                    <br/> et on fait de l'ordinateur aussi.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="team">
+        <div class="content">
+            <h2>L'équipe'</h2>
+            <div class="trombi">
+                <figure>
+                    <img src="images/Ibra.jpg" alt="Photo d'Ibrahim" width="150px" height="200px">
+                    <figcaption>Préparation du café et dev</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="images/Clem.jpg" alt="Photo de Clemens" width="150px" height="200px">
+                    <figcaption>Président</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="images/Chris.jpg" alt="Photo de Christopher" width="150px" height="200px">
+                    <figcaption>Directeur</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="images/Juju.jpg" alt="Photo de Julien" width="150px" height="200px">
+                    <figcaption>directeur commercial</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="content">
+            <div class="partners">
+                Aucun partenaire, Juju ne fous rien !!
+            </div>
+
+            <div class="favorites">
+                <ul>
+                    <li>
+                        <a href="#">HappyTreeFriends</a>
+                    </li>
+                    <li>
+                        <a href="#">VandB</a>
+                    </li>
+                    <li>
+                        <a href="#" onmousedown="alert('Petit cochon !')">youporn</a>
+                    </li>
+                    <li>
+                        <a href="#">youtube</a>
+                    </li>
+                    <li>
+                        <a href="#">MyLittlePoney</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

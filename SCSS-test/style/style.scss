@@ -1,0 +1,11 @@
+@import "colors.scss";
+
+* {
+    box-sizing: border-box;
+}
+
+body{
+    background-color: $backgroung-color;
+    color: $text-color;
+}
+

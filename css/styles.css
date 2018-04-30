@@ -1,0 +1,81 @@
+*
+{
+    box-sizing: border-box;
+}
+
+h1
+{
+    color:purple;
+    background-color: yellowgreen;
+}
+
+ul>li
+{
+    color: green;
+}
+
+ul>li>ul>li
+{
+    color:red;
+}
+
+del
+{
+    font-weight: bold;
+    display: block;
+}
+
+ul>li:nth-child(2)>:first-child
+{
+    font-style: italic;
+}
+
+ul>li>div#apples
+{
+    text-decoration: underline;
+}
+
+p#_first
+{
+    padding: 20px;
+    border: 20px solid red;
+    margin: 20px;
+    width: 50%;
+}
+
+a
+{
+    color:rgb(194, 194, 47);
+    padding: 0px;
+    background-color: pink;
+}
+
+a:hover
+{
+    color:red;
+    padding: 15px;
+}
+
+ul#navigation
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 25px;
+    margin: 0;
+}
+
+ul#navigation>li
+{
+    list-style-type: none;
+}
+
+ul#navigation>li:nth-child(2)
+{
+    order: 2;
+}
+
+ul#navigation>li:nth-child(3)
+{
+    order: 1;
+}

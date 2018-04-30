@@ -1,0 +1,62 @@
+*{
+    box-sizing: border-box;
+    margin: 5px;
+}
+
+$side-width: 550px;
+$min-site-width: 850px;
+
+body{
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+    margin: 0 auto;
+    
+
+    header>img{
+        width: 99%;
+    }
+
+    &>div{
+        display: flex;
+        width: 99%;
+
+        #left-hand-side{
+            width: $side-width;
+            background-color: rgb(27, 27, 214);
+            color: rgb(66, 172, 66);
+        }
+
+        #right-hand-side{
+            width: $side-width;
+            background-color: rgb(233, 24, 24);
+            color: white;
+        }
+    }
+
+    #main-content{
+        h1{
+            font-size: 36px;
+            font-style: italic;
+        }
+
+        #images{
+            display: flex;
+            justify-content: space-between;
+    
+    
+            img{
+                width: 250px;
+                height: 200px;
+            }
+        }
+
+        #video-youtube{
+            width: 99%;
+        }
+    } 
+}
+
+@media screen and (max-width: $min-site-width){
+
+}

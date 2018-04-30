@@ -1,0 +1,28 @@
+fieldset{
+    width: 30rem;
+}
+
+*{
+    box-sizing: border-box;
+    margin:     0.3rem;
+}
+
+#submit{
+    position:           relative;
+    left:               10rem;
+    right:              20rem;
+    padding:            15px;
+    background-color: red;
+    box-shadow:         2px 4px 10px gray;
+}
+
+label:not(.radio){
+    display:    inline-block;
+    width:      8rem;
+    text-align: right;
+}
+
+label.radio{
+    display:    inline-block;
+    width:      5rem;
+}

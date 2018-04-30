@@ -1,0 +1,20 @@
+*{
+    box-sizing: border-box;
+}
+
+.item{
+    float: left;
+    display: flex;
+    width: 49vw;
+}
+
+.item header img{
+    width: 5rem;
+    height: 5rem;
+}
+
+@media screen and (max-width: 640px){
+    .item{
+        flex-direction: column;
+    }
+}

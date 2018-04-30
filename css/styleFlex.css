@@ -1,0 +1,60 @@
+*
+{
+    box-sizing: border-box;
+    margin: 10;
+    border-radius: 10;
+}
+
+body
+{
+    background-color: rgb(86, 241, 241);
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    padding: 10;
+}
+
+header
+{
+    background-color: purple;
+    color:white;
+    position: fixed;
+    top:0;
+}
+
+section
+{
+    display: flex;
+    flex-grow: 1;
+    background-color: tomato;
+}
+
+aside
+{
+    padding: 10px;
+    background-color: slategray;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 200px;
+}
+
+footer
+{
+    background-color: springgreen;
+    height:200px
+}
+
+article
+{
+    flex-grow: 1;
+}
+
+article>p
+{
+    font-size: 40px;
+}
+
+span
+{
+    font-size: 0.5em;
+}

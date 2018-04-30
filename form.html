@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/styleForm.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+
+
+        <fieldset id="infos">
+            <legend>Infos personnelles</legend>
+
+
+            <!--NOM-->
+            <label for="lastName">NOM :</label>
+            <input id="lastName" type="text" name="lastName" placeholder="DUPONT" required>
+            <br/>
+
+            <!--PRENOM-->
+            <label for="firstName">PRENOM :</label>
+            <input id="firstName" type="text" name="firstName" placeholder="Jean" required>
+            <br/>
+
+            <!--SEXE-->
+            <label for="gender">SEXE :</label>
+            <label class="radio" for="male">
+                <input id="male" type="radio" name="gender" value="male"> Homme
+            </label>
+            <label class="radio" for="female">
+                <input id="female" type="radio" name="gender" value="female"> Femme
+            </label>
+            <label class="radio" for="autre">
+                <input id="autre" type="radio" name="gender" value="other" checked> Autre
+            </label>
+            <br/>
+
+            <!--EMAIL-->
+            <label for="mail">E-mail :</label>
+            <input id="mail" type="text" name="mail" placeholder="dupont@mail.fr" required>
+            <br/>
+
+            <!--NEWSLETTER-->
+            <label for="newsLetter">
+                <input type="checkbox" name="newsLetter" id="newsLetter" checked> Recevoir la news letter
+            </label>
+            <br/>
+
+            <!--ENVOYER-->
+            <button id="submit" type="submit">Envoyer</button>
+
+
+        </fieldset>
+
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+$site-width: 950px;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration-line: none;
+    transition: 0.5s;
+
+    &:hover{
+        color: rgb(149, 209, 80);
+    }
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(61, 58, 83);
+}
+
+.content{
+    width: $site-width;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+}
+
+header{
+
+    *{color: white;}
+
+    .content{
+        padding-top: 2rem;
+        justify-content: space-between;
+        height: 150px;
+    }
+
+    .navigation{
+        position: absolute;
+        bottom: 0;
+
+        a{
+            border: solid 3px rgb(85, 99, 116);
+            background-color: rgb(97, 129, 141);
+        }
+    }
+}
+
+#presentation{
+
+    margin-top: 2rem;
+
+    article{
+        background-color: rgb(88, 120, 121);
+        padding: 0.5rem;
+        border-radius: 8px;
+        box-shadow: black 4px 4px 4px;
+
+        &:first-child{
+            margin-right: 0.5rem;
+        }
+
+        &:last-child{
+            margin-left: 0.5rem;
+        }
+    }
+}
+
+#team{
+    margin-top: 2rem;
+
+    .content{
+        justify-content: center;
+        flex-direction: column;
+        background-color: rgb(88, 120, 121);
+        padding: 3rem;
+        border-radius: 8px;
+        box-shadow: black 4px 4px 4px;
+
+        h2{
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .trombi{
+            display: flex;
+            justify-content: space-around;
+
+            figure{
+                position: relative;
+                box-shadow: black 2px 3px 2px;
+
+                img{
+                    display: block;
+                }
+
+                figcaption{
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    color: white;
+                    background-color: rgba(63, 62, 62, 0.589);
+                }
+            }
+        }
+    }
+}
+
+footer{
+    margin-top: 2rem;
+
+    .content{
+        justify-content: space-between;
+        background-color: rgb(88, 120, 121);
+        padding: 3rem;
+        border-radius: 8px;
+        box-shadow: black 4px 4px 4px;
+
+        li{
+            list-style-type: none;
+        }
+    }
+
+}
