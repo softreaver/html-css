@@ -1,0 +1,14 @@
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: 1em; }
+
+form label {
+  text-align: right; }
+
+form .error {
+  border-color: red; }
+
+@media screen and (max-width: 768px) {
+  form label {
+    text-align: left; } }
