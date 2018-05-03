@@ -10,6 +10,7 @@
 
         <?php
         $check_form['url'] = false;
+        $check_form['pseudo'] = false;
         $check_form['password'] = false;
         $check_form['password-check'] = false;
         $check_form['cms'] = false;
