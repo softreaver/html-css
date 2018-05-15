@@ -19,50 +19,84 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <?php
-            $check_form['url'] = false;
-            $check_form['pseudo'] = false;
-            $check_form['password'] = false;
-            $check_form['password-check'] = false;
-            $check_form['cms'] = false;
-            $check_form['statut'] = false;
+      //Création de la connexion à la base de données
+      $connection = new PDO('mysql:host=localhost;dbname=testphpadmin', 'root', '');
 
-            foreach($_POST as $key => $value){
-                if($value !== 'default' && $value !== ''){
-                    $line[$key] = $value;
-                    $check_form[$key] = true;
-                }
+      //Si on arrive sur la page suite au submit du forumlaire, je dois procéder aux vérifications des données
+      if(!isset($_GET['display']))
+      {
+        $check_form['url'] = false;
+        $check_form['pseudo'] = false;
+        $check_form['password'] = false;
+        $check_form['password-check'] = false;
+        $check_form['cms'] = false;
+        $check_form['statut'] = false;
+
+        foreach($_POST as $key => $value){
+            if($value !== 'default' && $value !== ''){
+                $line[$key] = $value;
+                $check_form[$key] = true;
             }
+        }
 
-            //On vérifie que tous les champs obligatoires du formulaire ont bien été remplis
-            foreach($check_form as $key => $value){
-                if($check_form[$key] == false){
-                    if(!isset($error))
-                        $error = '?';
-                    else
-                        $error .= "&";
+        //On vérifie que tous les champs obligatoires du formulaire ont bien été remplis
+        foreach($check_form as $key => $value){
+            if($check_form[$key] == false){
+                if(!isset($error))
+                    $error = '?';
+                else
+                    $error .= "&";
 
-                    $error .= $key;
-                }
+                $error .= $key;
             }
+        }
 
-            //on vérifie que les deux passwords sont identique
-            if($line['password'] !== $line['password-check']){
-                if(isset($error)){
-                    $error .= '&password-different';
-                }else{
-                    $error = '?password-different';
-                }
-            }
-
+        //on vérifie que les deux passwords sont identique
+        if($line['password'] !== $line['password-check']){
             if(isset($error)){
-                //s'il y a au moins un champ obligatoire non rempli, alors renvoyer vers le formulaire
-                header("location: general.php" . $error);
-                exit;
+                $error .= '&password-different';
             }else{
-                //Sinon j'enregistre les données
-                $data[] = $line;
+                $error = '?password-different';
             }
-        ?>
+        }
+
+        if(isset($error)){
+            //s'il y a au moins un champ obligatoire non rempli, alors renvoyer vers le formulaire
+            header("location: general.php" . $error);
+            exit;
+        }else{
+            //Sinon j'enregistre les données dans la base de données
+            $requete = $connection->prepare("INSERT INTO websites VALUES (null, :url, :pseudo, :password, :cms, :statut, :description)");
+            $requete->bindParam(':url', $line['url']);
+            $requete->bindParam(':pseudo', $line['pseudo']);
+            $requete->bindParam(':password', $line['password']);
+            $requete->bindParam(':cms', $line['cms']);
+            $requete->bindParam(':statut', $line['statut']);
+            $requete->bindParam(':description', $line['messageArea']);
+
+            if(!$requete->execute())
+            {//Si la requête à échouée, récupérer le type d'erreur
+              $errorDB = $requete->errorInfo()[2];
+            }
+        }
+      }
+
+      //Récupérer toute les données présentes en base de donnée
+      $requete = $connection->prepare("SELECT url, pseudo, password, cms, statut, description FROM websites ORDER BY ID DESC");
+      if($requete->execute())
+      {//Ajouter toute la liste dans data
+        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
+        foreach($resultat as $key => $value)
+        {
+          $website[$key] = $value;
+          $data = $website;
+        }
+      }
+      else
+      {//Si la requête à échouée, récupérer le type d'erreur
+        $errorDB = $requete->errorInfo()[2];
+      }
+    ?>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -287,6 +321,23 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+
+            <?php if(!isset($_GET['display'])){ ?>
+            <p class="col-xs-12">
+              <?php 
+                if(isset($errorDB))
+                {//Une erreur est survenu lors de la comminication  avec la base de données
+                  echo '<span style="color: red">ERREUR - La communication avec la base de données ne s\'est pas faite correctement!';
+                  echo '<br/>';
+                  echo $errorDB . '</span>';
+                }
+                else
+                {// L'a jout des nouvelles données s'est bien passé
+                  echo '<span style="color: green">Le site à bien été ajouté à la liste</span>';
+                }
+              ?>
+            </p><?php
+            }?>
             
                 <table id="example2" class="table table-bordered table-hover">
                     <thead>
