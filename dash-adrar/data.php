@@ -19,6 +19,13 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <?php
+      session_start();
+
+      //Vérifier si une session est déjà ouverte
+      if(!isset($_SESSION['fullName'])){
+        header("location: index.php");
+        exit;
+      }
       //Création de la connexion à la base de données
       $connection = new PDO('mysql:host=localhost;dbname=testphpadmin', 'root', '');
 
