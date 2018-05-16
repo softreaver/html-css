@@ -168,7 +168,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="./index.html" class="nav-link active">
+            <a href="./index.php" class="nav-link active">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
                 Tableau de bord
@@ -198,6 +198,15 @@
               <i class="nav-icon fa fa-book"></i>
               <p>
                 Profil
+                <i class="fa fa-angle-left right"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./connect.php?disconnect" class="nav-link">
+              <i class="nav-icon fa sign-out-alt"></i>
+              <p>
+                Se déconnecter
                 <i class="fa fa-angle-left right"></i>
               </p>
             </a>

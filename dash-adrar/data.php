@@ -85,12 +85,7 @@
       $requete = $connection->prepare("SELECT url, pseudo, password, cms, statut, description FROM websites ORDER BY ID DESC");
       if($requete->execute())
       {//Ajouter toute la liste dans data
-        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
-        foreach($resultat as $key => $value)
-        {
-          $website[$key] = $value;
-          $data = $website;
-        }
+        $data = $requete->fetchAll(PDO::FETCH_ASSOC);
       }
       else
       {//Si la requête à échouée, récupérer le type d'erreur
@@ -250,7 +245,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="./index.html" class="nav-link active">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
@@ -267,7 +262,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="./data.php?display" class="nav-link">
               <i class="nav-icon fa fa-table"></i>
               <p>
@@ -281,6 +276,15 @@
               <i class="nav-icon fa fa-book"></i>
               <p>
                 Profil
+                <i class="fa fa-angle-left right"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="./connect.php?disconnect" class="nav-link">
+              <i class="nav-icon fa sign-out-alt"></i>
+              <p>
+                Se déconnecter
                 <i class="fa fa-angle-left right"></i>
               </p>
             </a>
