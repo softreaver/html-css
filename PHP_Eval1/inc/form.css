@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
+.error {
+    border-color: red;
+}
+
+.error-feedback {
+    color: red;
+}
+
+.check-container {
+    border: 2px solid;
+    border-color: grey;
+    padding: 1em;
+    padding-top: 0;
+    border-radius: 6px;
+    margin-bottom: 1em;
+}
