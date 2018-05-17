@@ -26,9 +26,10 @@
             //Je récupère toutes les données possible
             foreach($keys as $key){
                 if(isset($_POST[$key])){
-                    if(sizeof(trim( $_POST[$key])) > 0 && 
-                                    $_POST[$key] != null && 
-                                    $_POST[$key] != 'default'){
+                    if(trim($_POST[$key]) != '' && 
+                            $_POST[$key] != null && 
+                            $_POST[$key] != 'default')
+                    {
                         $data[$key] = $_POST[$key];
                     }
                     else{

@@ -32,9 +32,10 @@
         //Je récupère toutes les données possible
         foreach($keys as $key){
             if(isset($_POST[$key])){
-                if(sizeof(trim( $_POST[$key])) > 0 && 
-                                $_POST[$key] != null &&
-                                $_POST[$key] != 'default'){
+                if(trim($_POST[$key]) != '' && 
+                        $_POST[$key] != null &&
+                        $_POST[$key] != 'default')
+                {
                     $data[$key] = $_POST[$key];
                 }
                 else{
@@ -47,13 +48,26 @@
             }            
         }
 
+        //S'il y a au moins une erreur je renvois l'utilisateur à la première page
+        if($erreur){
+            $param = '?callback';
+            foreach($data as $key => $value){
+                $param .= '&' . $key . '=' . $value;
+            }
+
+            header('location:page_2.php' . $param);
+            exit;
+        }
+
         //récupérer les index des checkbox cochées
         foreach($checkboxes as $index => $checkbox){
             if(isset($_POST[$checkbox])){
                 $check[] = $index;
             }
         }
-        $data['checkboxes'] = $check;
+        if(isset($check)) {
+            $data['checkboxes'] = $check;
+        }
 
         //Affichage des données
         echo '<h2>Récapitulatif des données</h2>';

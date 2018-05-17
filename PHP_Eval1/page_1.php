@@ -34,8 +34,10 @@
                 <input type="number" name="age" class="form-control <?php if(!isset($_GET['age']) && isset($_GET['callback'])) { echo 'error'; } ?>" id="age" value="<?php if(isset($_GET['age'])){ echo $_GET['age']; } ?>">
                 <?php //J'affiche un message d'erreur si l'utilisateur n'a pas rempli ce champ
                     if(!isset($_GET['age']) && isset($_GET['callback'])) { echo '<div class="error-feedback">Merci de renseigner ce champs</div>'; 
-                    }elseif($_GET['age'] < 1){// Si l'age est inférieur à 1
-                        echo '<div class="error-feedback">Merci d\'entrer une valeur positive</div>';
+                    }elseif(isset($_GET['age'])){
+                        if($_GET['age'] < 1){// Si l'age est inférieur à 1
+                            echo '<div class="error-feedback">Merci d\'entrer une valeur positive</div>';
+                        }
                     }
                 ?>
             </div>
