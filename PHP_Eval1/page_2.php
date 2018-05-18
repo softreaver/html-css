@@ -18,9 +18,29 @@
     $keys[] = "age";
     $keys[] = "sexe";
 
-    //Si je proviens de la première page je récupère les données
-    if(isset($_POST['from'])){
-        if($_POST['from'] = "page1"){
+    //Création de la connexion avec la base de données
+    $connexion = new PDO('mysql:host=localhost;dbname=adrar_user;charset=utf8', 'root', '');
+
+    //Récupération de la liste de toutes les compétences possibles depuis la base
+    $requete = $connexion->prepare("SELECT ID, nom FROM competences");
+    if($requete->execute()){// Si la requête à bien fonctionnée
+        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+    else{ //Si la requête n'a pas fonctionnée
+        //Afficher la cause de l'echec
+        echo 'ERREUR - ' . $requete->errorInfo()[2];
+    }
+
+    //Liste des checkbox
+    if(isset($resultat)){
+        foreach($resultat as $competence){
+            $checkboxes[$competence['ID']] = $competence['nom'];
+        }
+    }
+
+    //Si je proviens de la première page ou retour de la troisième page
+    if(isset($_POST['from']) || isset($_GET['callback'])){
+        if($_POST['from'] = "page1"){//Je viens de la première page
 
             $erreur = false;
             //Je récupère toutes les données possible
@@ -57,8 +77,7 @@
                 exit;
             }
         }
-        else
-        {//Je ne proviens pas du formulaire de la première page
+        elseif(!isset($_GET['callback'])){//Je ne proviens pas du formulaire de la première page ni de la troisième page
             //Je renvois l'utilisateur sur la première page
             header('location: page_1.php');
             exit;
@@ -84,44 +103,32 @@
             <div class="form-group">
                 <label for="passion">Passion</label>
                 <input type="text" class="form-control" name="passion" id="passion" placeholder="Entrez votre passion" required>
-                <?php //J'affiche un message d'erreur si l'utilisateur n'a pas rempli ce champ
-                    if(!isset($_POST['passion']) && isset($_POST['callback'])) { echo '<div class="error-feedback">Merci de renseigner ce champs</div>'; }
-                ?>
             </div>
             <div class="form-group">
                 <label for="profession">Profession</label>
                 <input type="text" class="form-control" name="profession" id="profession" placeholder="Entrez votre profession" required>
-                <?php //J'affiche un message d'erreur si l'utilisateur n'a pas rempli ce champ
-                    if(!isset($_POST['profession']) && isset($_POST['callback'])) { echo '<div class="error-feedback">Merci de renseigner ce champs</div>'; }
-                ?>
             </div>
             
             <div class="check-container">
                 <h2>Compétences</h2>
-                <div class="col-auto my-1">
-                    <div class="custom-control custom-checkbox mr-sm-2">
-                        <input type="checkbox" class="custom-control-input" id="developpement" name="developpement">
-                        <label class="custom-control-label" for="developpement">Développement</label>
-                    </div>
-                </div>
-                <div class="col-auto my-1">
-                    <div class="custom-control custom-checkbox mr-sm-2">
-                        <input type="checkbox" class="custom-control-input" id="reseau" name="reseau">
-                        <label class="custom-control-label" for="reseau">Réseau</label>
-                    </div>
-                </div>
-                <div class="col-auto my-1">
-                    <div class="custom-control custom-checkbox mr-sm-2">
-                        <input type="checkbox" class="custom-control-input" id="gestion" name="gestion">
-                        <label class="custom-control-label" for="gestion">Géstion</label>
-                    </div>
-                </div>
-                <div class="col-auto my-1">
-                    <div class="custom-control custom-checkbox mr-sm-2">
-                        <input type="checkbox" class="custom-control-input" id="comptabilite" name="comptabilite">
-                        <label class="custom-control-label" for="comptabilite">Comptabilité</label>
-                    </div>
-                </div>
+
+                <?php
+                    //Afficher tous les choix de compétences
+                    foreach($checkboxes as $index => $value){ //Création d'une checkbox pour chaque compétences ?>
+                        <div class="col-auto my-1">
+                            <div class="custom-control custom-checkbox mr-sm-2">
+                                <input type="checkbox" class="custom-control-input" id="<?php echo $index; ?>" name="<?php echo $index; ?>">
+                                <label class="custom-control-label" for="<?php echo $index; ?>"><?php echo $value; ?></label>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                ?>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Example textarea</label>
+                <textarea class="form-control" id="description" rows="3" name="description"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Suivant</button>
