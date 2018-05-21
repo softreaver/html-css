@@ -8,12 +8,16 @@
     <title>Envoie des données</title>
 </head>
 <body>
+    <header>
+        <h1>Mon blog</h1>
+    </header>
+
     <?php
         //Mes données
-        const $DBENGINE     = "mysql";
-        const $HOST         = "localhost";
-        const $DBNAME       = "eval_blog";
-        const $CHARSET      = "utf8";
+        $DBENGINE     = "mysql";
+        $HOST         = "localhost";
+        $DBNAME       = "eval_blog";
+        $CHARSET      = "utf8";
 
         if(isset($_POST['from'])){
             if($_POST['from'] == 'creationArtcile'){//Je proviens du formulaire de création d'artcile
@@ -40,10 +44,6 @@
                     {
                         $erreur = true;
                     }
-                    //Vérifier que l'age entré est bien une valeur positive
-                    if($key === 'age' && $_POST[$key] < 1){
-                        $erreur = true;
-                    }
                 }
 
                 //S'il y a au moins une erreur je renvois l'utilisateur à la première page
@@ -57,24 +57,31 @@
                     exit;
                 }
                 else{ //Il n'y a pas d'erreur, je peut envoyer les données à la base
-                    //Création de la connexion avec la base de données
-                    $connexion = new PDO($DBENGINE . ':host=' . $HOST . ';dbname=' . $DBNAME . ';charset=' . $CHARSET, 'root', '');
+                    try{
+                        //Création de la connexion avec la base de données
+                        $connexion = new PDO($DBENGINE . ':host=' . $HOST . ';dbname=' . $DBNAME . ';charset=' . $CHARSET, 'root', '');
+                    }
+                    catch(Exception $e){
+                        echo '<h3 class="error-message">ERREUR - ' . $e->getMessage() . '</h3>';
+                        exit;
+                    }
 
                     //Préparation de la requête
+                    $date = (int) convertirDate($data['date']);
                     $requete = $connexion->prepare("INSERT INTO articles VALUES (null, :titre, :date, :auteur, :contenu)");
                     $requete->bindParam(":titre", $data['titre']);
-                    $requete->bindParam(":date", $data['date']);
+                    $requete->bindParam(":date", $date);
                     $requete->bindParam(":auteur", $data['auteur']);
                     $requete->bindParam(":contenu", $data['contenu']);
 
                     //Envoie de la requête
                     if($requete->execute()){//La requête est un succès
-                        echo '<h3 style="color: green">L\'artcile a été ajouté avec succès.</h3>';
-                        header("refresh:5;url=index.php");
+                        echo '<h3 class="message">L\'article a été ajouté avec succès.</h3>';
+                        header("refresh:3;url=index.php");
                         exit;
                     }
                     else{//La requête échoue
-                        echo '<h3 style="color: red">ERREUR - ' . $requete->errorInfo()[2] . '</h3>';
+                        echo '<h3 class="error-message">ERREUR - ' . $requete->errorInfo()[2] . '</h3>';
                         header("refresh:5;url=index.php");
                         exit;
                     }
@@ -93,3 +100,27 @@
     ?>
 </body>
 </html>
+
+<?php
+//Converti une date au format yyyy-mm-dd en chaine de caraxtère au format yyyymmdd
+    function convertirDate($date){
+        if(gettype($date) == "string" && strlen($date) == 10 ){
+            $ret = '';
+            for($i = 0; $i < strlen($date); $i++){
+                if($date[$i] !== '-'){
+                    if($date[$i] >= 0 && $date[$i] <= 9){
+                        $ret .= $date[$i];
+                    }
+                    else{
+                        return 'ERREUR';
+                    }
+                }
+            }
+            return $ret;
+        }
+        else{
+            return 'ERREUR';
+        }
+    }
+
+    ?>

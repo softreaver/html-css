@@ -2,6 +2,16 @@
     box-sizing: border-box;
 }
 
+header{
+    background-image: linear-gradient(white, beige);
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+
+header>h1{
+    text-align: center;
+}
+
 .main-container{
     display: flex;
     flex-direction: column;
@@ -13,17 +23,27 @@
     display: flex;
     flex-direction: column;
     background-color: beige;
+    box-shadow: 4px 4px 3px grey;
+    border-radius: 25px;
     padding: 2em;
 }
 
 form{
     display: flex;
     flex-direction: column;
+    margin: 1em auto;
+    width: 50vw;
+    max-width: 500px;
 }
 
 form input,
 form textarea{
     margin-bottom: 1em;
+}
+
+a{
+    text-decoration-line: none;
+    color: white;
 }
 
 a:visited{
@@ -35,16 +55,87 @@ a:visited{
     color: white;
     text-align: center;
     text-decoration-line: none;
-    background-color: rgb(38, 38, 189);
+    background-color: rgb(180, 226, 94);
+    box-shadow: 4px 4px 3px rgb(180, 226, 94);
     border-radius: 25px;
     padding: 1em;
-    width: 0 auto;
+    width: 250px;
+    margin: 0 auto;
+}
+
+.red-button{
+    color: white;
+    text-align: center;
+    text-decoration-line: none;
+    background-color: red;
+    border-radius: 25px;
+    padding: 1em;
+    width: 250px;
+    margin: 0 auto;
 }
 
 .articles{
     display: flex;
+    flex-wrap: wrap;
+}
+
+article:not(#single){
+    padding: 1em;
+    margin: 1em;
+    width: 250px;
+    background-color: rgb(180, 226, 94);
+    border-radius: 10px;
+    box-shadow: 4px 4px 3px grey;
+    color: white;
+}
+
+aside{
+    padding: 1em;
+    margin: 1em;
+    width: 250px;
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: 4px 4px 3px grey;
+    color: white;
+    flex-grow: 0;
 }
 
 .error{
-    color: red;
+    border-color: red;
+}
+
+.child-content{
+    width: 75%;
+}
+
+.title{
+    text-align: center;
+}
+
+.infos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info p{
+    margin: 0;
+}
+
+.message{
+    color: white;
+    background-color: green;
+    box-shadow: 4px 4px 3px grey;
+    width: 60vw;
+    padding: 1em;
+    margin: 1em auto;
+}
+
+.error-message{
+    color: white;
+    background-color: red;
+    box-shadow: 4px 4px 3px grey;
+    width: 60vw;
+    padding: 1em;
+    margin: 1em auto;
 }
