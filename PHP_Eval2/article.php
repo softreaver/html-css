@@ -1,18 +1,8 @@
 <?php
-    //Mes données
-    $DBENGINE     = "mysql";
-    $HOST         = "localhost";
-    $DBNAME       = "eval_blog";
-    $CHARSET      = "utf8";
+    require('fonctions.php');
 
-    try{
-        //Connexion à la base de données
-        $connexion = new PDO($DBENGINE . ':host=' . $HOST . ';dbname=' . $DBNAME . ';charset=' . $CHARSET, 'root', '');
-    }
-    catch(Exception $e){
-        echo '<h3 style="color: red">ERREUR - ' . $e->getMessage() . '</h3>';
-        exit;
-    }
+    //Création de la connexion à la base de données
+    $connexion = connexionBD();
     
     //Récupération de l'ID de l'article
     if(isset($_GET['idarticle'])){
@@ -47,7 +37,24 @@
 </head>
 <body>  
     <header>
-        <h1>Mon blog</h1>
+        <h1>Mon mini blog</h1>
+        <?php
+        session_start();
+
+        if(isset($_SESSION['pseudo'])){ ?>
+            <div id="connexion" class="box">
+                <h2 style="margin: 0">Bienvenu <?php echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']; ?></h2>
+                <a class="red-button" href="envoie.php?disconnect">Se déconnecter</a>
+            </div>
+            
+        <?php
+        }
+        else{
+            echo "<p class=\"error-message\">ERREUR - Vous devez être connecté pour consulter un artcile !</p>";
+            header("refresh:3;url=" . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+        ?>
     </header>
 
     <div class="main-container">
@@ -85,15 +92,3 @@
 </body>
 </html>
 
-<?php 
-    //Converti une date au format yyyymmdd en chaine de caractère au format dd/mm/yyyy
-    function afficherDate($date){
-        if(gettype($date) == "string" && strlen($date) == 8 ){
-            $ret = substr($date, 6) . '/' . substr($date, 4, 2) . '/' . substr($date, 0, 4);
-            return $ret;
-        }
-        else{
-            return 'Date inconnue';
-        }
-    }
-?>

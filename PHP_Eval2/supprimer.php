@@ -9,25 +9,14 @@
 </head>
 <body>
     <header>
-        <h1>Mon blog</h1>
+        <h1>Mon mini blog</h1>
     </header>
 
     <?php
-        if(isset($_POST['from'])){
-            //Mes données
-            $DBENGINE     = "mysql";
-            $HOST         = "localhost";
-            $DBNAME       = "eval_blog";
-            $CHARSET      = "utf8";
+    require('fonctions.php');
 
-            try{
-                //Connexion à la base de données
-                $connexion = new PDO($DBENGINE . ':host=' . $HOST . ';dbname=' . $DBNAME . ';charset=' . $CHARSET, 'root', '');
-            }
-            catch(Exception $e){
-                echo '<h3 class="error-message">ERREUR - ' . $e->getMessage() . '</h3>';
-                exit;
-            }
+        if(isset($_POST['from'])){
+            $connexion = connexionBD();
             
             if($_POST['from'] == 'article'){
                 //Récupération de l'ID de l'article

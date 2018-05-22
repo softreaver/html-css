@@ -77,6 +77,7 @@ a:visited{
 .articles{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 article:not(#single){
@@ -87,6 +88,34 @@ article:not(#single){
     border-radius: 10px;
     box-shadow: 4px 4px 3px grey;
     color: white;
+}
+
+.box{
+    padding: 1em;
+    margin: 1em;
+    background-color: rgb(180, 226, 94);
+    border-radius: 10px;
+    box-shadow: 4px 4px 3px grey;
+    color: white;
+}
+
+header{
+    position: relative;
+}
+
+#connexion{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 0;
+}
+
+#connexion * {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 200px;
 }
 
 aside{
@@ -118,7 +147,7 @@ aside{
     align-items: center;
 }
 
-.info p{
+.infos p{
     margin: 0;
 }
 
@@ -138,4 +167,12 @@ aside{
     width: 60vw;
     padding: 1em;
     margin: 1em auto;
+}
+
+@media screen and (max-width: 750px){
+    #connexion{
+        position: static;
+        width: 250px;
+        margin: 0 auto;
+    }
 }
