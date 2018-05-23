@@ -2,6 +2,13 @@
     box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4 {
+    text-align: center;
+}
+
 header{
     background-image: linear-gradient(white, beige);
     padding-bottom: 0.5em;
@@ -63,6 +70,18 @@ a:visited{
     margin: 0 auto;
 }
 
+.blue-button{
+    color: white;
+    text-align: center;
+    text-decoration-line: none;
+    background-color: rgb(94, 184, 226);
+    box-shadow: 4px 4px 3px rgb(94, 184, 226);
+    border-radius: 25px;
+    padding: 1em;
+    width: 250px;
+    margin: 0 auto;
+}
+
 .red-button{
     color: white;
     text-align: center;
@@ -74,7 +93,8 @@ a:visited{
     margin: 0 auto;
 }
 
-.articles{
+.articles,
+.center-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -99,17 +119,71 @@ article:not(#single){
     color: white;
 }
 
+.grey-box{
+    padding: 1em;
+    margin: 1em;
+    background-color: rgb(190, 187, 187);
+    border-radius: 10px;
+    box-shadow: 4px 4px 3px grey;
+    color: white;
+}
+
 header{
     position: relative;
 }
 
-#connexion{
+#calculette{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 350px;
+}
+
+#calculette>form {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+#calculette>form * {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 4em;
+    margin-right: 0.5em;
+}
+
+#user-box{
     display: flex;
     flex-direction: column;
     position: absolute;
     right: 0;
     top: 0;
     margin-top: 0;
+}
+
+#user-box * {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 200px;
+}
+
+#contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 75vw;
+    margin: 0 auto;
+}
+
+#contact * {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 400px;
+}
+
+#connexion {
+    width: 250px;
+    margin: auto;
 }
 
 #connexion * {
@@ -169,10 +243,32 @@ aside{
     margin: 1em auto;
 }
 
+@media screen and (max-width: 975px){
+    #calculette {
+        width: 8em;
+    }
+
+    #calculette>form{
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
 @media screen and (max-width: 750px){
-    #connexion{
+    #user-box{
         position: static;
         width: 250px;
+        margin: 1em auto;
+    }
+
+    #calculette {
+        position: static;
+        width: 350px;
         margin: 0 auto;
+    }
+
+    #calculette>form{
+        flex-direction: row;
+        justify-content: center;
     }
 }
