@@ -21,20 +21,10 @@
             
         <?php
         }
-        else{ ?>
-            <div id="connexion" class="box">
-                <h2 style="margin: 0">Se connecter</h2>
-                <form action="envoie.php" method="POST">
-                    <input type="hidden" name="from" value="connexion">
-                    <input type="text" name="pseudo" placeholder="Entrez votre pseudo" required>
-                    <input type="password" name="password" placeholder="Entrez votre mot de passe" required>
-                    <input type="submit" value="Se connecter">
-                </form>
-                <div>
-                    ou <a href="enregistrement.php">s'enregistrer</a>
-                </div>
-            </div>
-        <?php
+        else{ 
+            echo '<h3 class="error-message">ERREUR - Vous devez être connecté pour pouvoir poster un article !</h3>';
+            header("refresh:3;url=index.php");
+            exit;
         }
         ?>
     </header>
