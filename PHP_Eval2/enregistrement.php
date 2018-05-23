@@ -41,15 +41,27 @@
 
     <div class="main-container">
         <div class="container">
-            <a href="index.php" class="button">Revenir à la liste des articles</a>
+            <h2>Formulaire d'enregistrement</h2>
             <form action="envoie.php" method="POST">
                 <input type="hidden" name="from" value="enregistrement">
+
+                <?php
+                    //Afficher les erreurs lorsqu'un homonyme existe déjà dans la base de données
+                    if(isset($_GET['doublonPseudo'])){
+                        echo '<h3 class="error-message">ERREUR - Le pseudo est déjà utilisé !</h3>';
+                    }
+
+                    if(isset($_GET['doublonEmail'])){
+                        echo '<h3 class="error-message">ERREUR - Le mail est déjà utilisé !</h3>';
+                    }
+                ?>
 
                 <label for="nom">Nom</label>
                 <input 
                     type="text"
                     name="nom" 
-                    id="nom" 
+                    id="nom"
+                    maxlength="20"
                     class="<?php if(!isset($_GET['nom']) && isset($_GET['callback'])){ echo 'error'; } ?>"
                     placeholder="<?php if(!isset($_GET['nom']) && isset($_GET['callback'])){ echo 'Merci de renseigner ce champs.'; } ?>" 
                     value="<?php if(isset($_GET['nom'])){ echo $_GET['nom']; } ?>" 
@@ -61,7 +73,7 @@
                     type="text" 
                     name="prenom" 
                     id="prenom" 
-                    maxlength="50"
+                    maxlength="20"
                     class="<?php if(!isset($_GET['prenom']) && isset($_GET['callback'])){ echo 'error'; } ?>"
                     placeholder="<?php if(!isset($_GET['prenom']) && isset($_GET['callback'])){ echo 'Merci de renseigner ce champs.'; } ?>" 
                     value="<?php if(isset($_GET['prenom'])){ echo $_GET['prenom']; } ?>" 
@@ -123,5 +135,9 @@
             ?>
         </div>
     </div>
+
+    <footer>
+        <?php include('contact_form.html'); ?>
+    </footer>
 </body>
 </html>

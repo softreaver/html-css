@@ -10,23 +10,7 @@
 <body>
     <header>
         <h1>Mon mini blog</h1>
-        <?php
-        session_start();
-
-        if(isset($_SESSION['pseudo'])){ ?>
-            <div id="connexion" class="box">
-                <h2 style="margin: 0">Bienvenu <?php echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']; ?></h2>
-                <a class="red-button" href="envoie.php?disconnect">Se déconnecter</a>
-            </div>
-            
-        <?php
-        }
-        else{ 
-            echo '<h3 class="error-message">ERREUR - Vous devez être connecté pour pouvoir poster un article !</h3>';
-            header("refresh:3;url=index.php");
-            exit;
-        }
-        ?>
+        <?php require('private_header.php'); ?>
     </header>
 
     <div class="main-container">
@@ -51,9 +35,8 @@
                     type="text" 
                     name="auteur" 
                     id="auteur" 
-                    class="<?php if(!isset($_GET['auteur']) && isset($_GET['callback'])){ echo 'error'; } ?>"
-                    placeholder="<?php if(!isset($_GET['auteur']) && isset($_GET['callback'])){ echo 'Merci de renseigner ce champs.'; } ?>" 
-                    value="<?php if(isset($_GET['auteur'])){ echo $_GET['auteur']; } ?>" 
+                    value="<?php echo $_SESSION['pseudo']; ?>" 
+                    disabled
                     required
                 >
 
@@ -86,6 +69,10 @@
             </form>
         </div>
     </div>
+
+    <footer>
+        <?php include('contact_form.html'); ?>
+    </footer>
 
     <script>//Permet de récupérer la date du jour
         Date.prototype.toDateInputValue = (function() {

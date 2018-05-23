@@ -95,15 +95,49 @@ function publier($titre, $date, $auteur, $contenu){
     }
 }
 
-//Vérifier qu'un utilisateur ne soit pas déjà enregistré dans la base de données
+//Vérifier qu'un pseudo ne soit pas déjà enregistré dans la base de données
 //renvoie un true si l'utilisateur n'est pas déjà enregistré sinon false
-function verifierDispo($pseudo, $email){
+function verifierDispoPseudo($pseudo){
+    //Mettre tous les caractères en minuscule afin d'enlever la sensibilité à la case
+    $pseudo = strtolower($pseudo);
+
     //Création de la connexion à la base de données
     $connexion = connexionBD();
 
     //Préparation de la requête
-    $requete = $connexion->prepare("SELECT pseudo, email FROM users WHERE pseudo = :pseudo AND email = :email");
+    $requete = $connexion->prepare("SELECT pseudo, email FROM users WHERE pseudo = :pseudo");
     $requete->bindParam(":pseudo", $pseudo);
+
+    //Envoie de la requête
+    if($requete->execute()){//La requête est un succès
+        //Récupération des données
+        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+
+        if($resultat['pseudo'] === $pseudo){// si on trouve un homonyme dans la base
+            return false;
+        }
+        else{ //sinon
+            return true;
+        }
+    }
+    else{//La requête échoue
+        echo '<h3 class="error-message">ERREUR - ' . $requete->errorInfo()[2] . '</h3>';
+        header("refresh:5;url=index.php");
+        exit;
+    }
+}
+
+//Vérifier qu'un Email ne soit pas déjà enregistré dans la base de données
+//renvoie un true si l'utilisateur n'est pas déjà enregistré sinon false
+function verifierDispoEmail($email){
+    //Mettre tous les caractères en minuscule afin d'enlever la sensibilité à la case
+    $email = strtolower($email);
+
+    //Création de la connexion à la base de données
+    $connexion = connexionBD();
+
+    //Préparation de la requête
+    $requete = $connexion->prepare("SELECT email FROM users WHERE email = :email");
     $requete->bindParam(":email", $email);
 
     //Envoie de la requête
@@ -111,7 +145,7 @@ function verifierDispo($pseudo, $email){
         //Récupération des données
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
 
-        if($resultat['pseudo'] === $pseudo && $resultat['email'] === $email){// si on trouve un homonyme dans la base
+        if($resultat['email'] === $email){// si on trouve un homonyme dans la base
             return false;
         }
         else{ //sinon
@@ -131,7 +165,7 @@ function enregistrerUtilisateur($nom, $prenom, $email, $pseudo, $password){
     $connexion = connexionBD();
 
     //Préparation de la requête
-    $requete = $connexion->prepare("INSERT INTO users VALUES (null, :nom, :prenom, :email, :pseudo, :password)");
+    $requete = $connexion->prepare("INSERT INTO users VALUES (null, :nom, :prenom, :email, :pseudo, :password, false)");
     $requete -> bindParam(":nom", $nom);
     $requete -> bindParam(":prenom", $prenom);
     $requete -> bindParam(":email", $email);
@@ -141,7 +175,8 @@ function enregistrerUtilisateur($nom, $prenom, $email, $pseudo, $password){
     //Envoie de la requête
     if($requete->execute()){//La requête est un succès
         echo '<h3 class="message">L\'utilisateur a été enregistré avec succès.</h3>';
-        connecterUtilisateur($pseudo, $password);
+        header("refresh:3;url=index.php");
+        exit;
     }
     else{//La requête échoue
         echo '<h3 class="error-message">ERREUR - ' . $requete->errorInfo()[2] . '</h3>';
@@ -150,6 +185,7 @@ function enregistrerUtilisateur($nom, $prenom, $email, $pseudo, $password){
     }
 }
 
+//Connecter un utilisateur au site
 function connecterUtilisateur($pseudo, $password){
     //Connexion à la base de données
     $connexion = connexionBD();
@@ -166,23 +202,24 @@ function connecterUtilisateur($pseudo, $password){
         
         if($pseudo == $resultat['pseudo'] && $password == $resultat['password']){ //Connexion réussi
             $_SESSION['pseudo'] = $pseudo;
-            $_SESSION['email'] = $resultat['email'];
-            $_SESSION['nom'] = $resultat['nom'];
+            $_SESSION['email']  = $resultat['email'];
+            $_SESSION['nom']    = $resultat['nom'];
             $_SESSION['prenom'] = $resultat['prenom'];
+            $_SESSION['admin']  = $resultat['admin'];
             echo '<h3 class="message">Vous êtes maintenant connecté. Bonjour '. $pseudo . '</h3>';
             header("refresh:3;url=index.php");
             exit;
         }
         else { //Connexion échouée
             echo '<h3 class="error-message">ERREUR - Le pseudo ou le mot de passe est incorrecte !</h3>';
-            header("refresh:5;url=index.php");
+            header("refresh:3;url=index.php");
             exit;
         }
         
     }
     else{
         echo '<h3 class="error-message">ERREUR - ' . $requete->errorInfo()[2] . '</h3>';
-        header("refresh:5;url=index.php");
+        header("refresh:3;url=index.php");
         exit;
     }
 }
