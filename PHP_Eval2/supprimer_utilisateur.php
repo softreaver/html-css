@@ -18,12 +18,12 @@
         if(isset($_POST['from'])){
             $connexion = connexionBD();
             
-            if($_POST['from'] == 'article'){
+            if($_POST['from'] == 'utilisateur'){
                 
-                if(isset($_POST['idarticle'])){
+                if(isset($_POST['iduser'])){
                     //Récupération de l'article demandé
-                    $requete = $connexion->prepare('SELECT * FROM articles WHERE ID = :id');
-                    $requete->bindParam(':id', $_POST['idarticle']);
+                    $requete = $connexion->prepare('SELECT ID, pseudo FROM users WHERE ID = :id');
+                    $requete->bindParam(':id', $_POST['iduser']);
 
                     //Envoie de la requete à la base
                     if($requete->execute()){ //La requête est un succès
@@ -45,15 +45,15 @@
             }
             elseif($_POST['from'] == 'this'){// l'utilisateur à cliqué sur OUI pour supprimer l'article
                 //Préparation de la requête
-                $requete = $connexion->prepare('DELETE FROM articles WHERE ID = :id');
-                $requete->bindParam(':id', $_POST['idarticle']);
+                $requete = $connexion->prepare('DELETE FROM users WHERE ID = :id');
+                $requete->bindParam(':id', $_POST['iduser']);
 
                 //Envoie de la requete à la base
                 if($requete->execute()){ //La requête est un succès
                     //Confirmer la suppression
-                    echo '<h3 class="message">L\'article a bien été supprimé</h3>';
-                    //Redirection automatique sur la liste des articles
-                    header("refresh:3;url=liste_articles.php");
+                    echo '<h3 class="message">L\'utilisateur a bien été supprimé</h3>';
+                    //Redirection automatique sur la liste des utilisateurs
+                    header("refresh:3;url=liste_utilisateurs.php");
                     exit;
                 }
                 else{ //La requête a échouée
@@ -76,10 +76,10 @@
 
     <div class="main-container">
         <div class="container">
-            <h3>Voulez-vous vraiment supprimer l'article : <?php echo $resultat['titre']; ?> ?</h3>
-            <form action="supprimer.php" method="POST">
+            <h3>Voulez-vous vraiment supprimer l'utilisateur : <?php echo $resultat['pseudo']; ?> ?</h3>
+            <form action="supprimer_utilisateur.php" method="POST">
                 <input type="hidden" name="from" value="this">
-                <input type="hidden" name="idarticle" value="<?php echo $resultat['ID']; ?>">
+                <input type="hidden" name="iduser" value="<?php echo $resultat['ID']; ?>">
                 <input class="red-button" type="submit" value="OUI">
                 <a class="button" href="<?php echo $_SERVER['HTTP_REFERER']; ?>">NON</a>
             </form>

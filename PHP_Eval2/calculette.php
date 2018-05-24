@@ -33,13 +33,18 @@
                     $resultat = modulo($num1, $num2);
                     break;
             }
+            if(gettype($resultat) === 'double'){
+                //Si le resultat est un nombre réel, on le limite à deux chiffres après la virgule
+                $resultat = number_format($resultat, 2, ',', ' ');
+            }
         }
     }
 ?>
 
 <div id="calculette" class="box">
     <h3 style="margin:0">Mini calculatrice</h3>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+    <!-- On met le contenu de la barre d'adresse du navigateur dans l'attribu action du formulaire -->
+    <form action="<?php echo $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING']; ?>" method="POST">
         <input type="hidden" name="calculer">
         <input type="number" id="num1" name="num1" value="<?php if(isset($_POST['num1'])){ echo $_POST['num1']; } ?>" required>
         <select name="operateur" id="operateur">

@@ -68,6 +68,27 @@ function afficherListe($liste){
     }
 }
 
+//Afficher la liste des utilisateurs
+function afficherListeUtilisateurs($liste){ ?>
+    <tbody> <?php
+        foreach($liste as $user){?>
+            <tr>
+                <td>
+                    <a style="display: block; color: black" href="utilisateur.php?iduser=<?php echo $user['ID']; ?>">
+                        <?php echo $user['pseudo']; ?>
+                    </a>
+                </td>
+                <td>
+                    <a style="display: block; color: black" href="utilisateur.php?iduser=<?php echo $user['ID']; ?>">
+                        <?php echo ($user['admin']) ? 'oui' : 'non'; ?>
+                    </a>
+                </td>
+            </tr>            
+        <?php
+        } ?>
+    </tbody><?php
+}
+
 
 //Envoyer un article sur la base de donnée
 function publier($titre, $date, $auteur, $contenu){
@@ -223,4 +244,26 @@ function connecterUtilisateur($pseudo, $password){
         exit;
     }
 }
+
+//Changer le statut d'un utilisateur (admin ou standart)
+function changerStatut($statut, $id){
+    //Connexion à la base de donnée
+    $connexion = connexionBD();
+
+    //Préparation de la requête
+    $requete = $connexion->prepare("UPDATE users SET admin = :statut WHERE ID = :id");
+    $requete->bindParam(":statut", $statut);
+    $requete->bindParam(":id", $id);
+
+    //Execution de la requête
+    $requete->execute();
+}
+
+//Permet de prévenir l'injection de code illicite
+function securiser($data){
+    $data = trim($data);
+    $data = strip_tags($data);
+    return $data;
+}
+
 ?>

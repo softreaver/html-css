@@ -17,7 +17,7 @@
         require('fonctions.php');
 
         if(isset($_POST['from'])){
-            if($_POST['from'] == 'creationArtcile'){//Je proviens du formulaire de création d'artcile
+            if(securiser($_POST['from']) == 'creationArtcile'){//Je proviens du formulaire de création d'artcile
                 //Liste de tous les champs du formulaire création d'article
                 $keys[] = "titre";
                 //$keys[] = "auteur"; //Valeur remplie automatiquement
@@ -29,9 +29,9 @@
                 //Je récupère toutes les données possible
                 foreach($keys as $key){
                     if(isset($_POST[$key])){
-                        if(trim($_POST[$key]) != '' && $_POST[$key] != null)
+                        if(securiser($_POST[$key]) != '' && securiser($_POST[$key]) != null)
                         {
-                            $data[$key] = $_POST[$key];
+                            $data[$key] = securiser($_POST[$key]);
                         }
                         else{
                             $erreur = true;
@@ -61,7 +61,7 @@
                 }
 
             }
-            elseif($_POST['from'] == 'enregistrement'){ //Je proviens du formulaire d'enregistrement d'utilisateur
+            elseif(securiser($_POST['from']) == 'enregistrement'){ //Je proviens du formulaire d'enregistrement d'utilisateur
                 //Liste de tous les champs du formulaire enregistrement
                 $keys[] = "nom";
                 $keys[] = "prenom";
@@ -75,9 +75,9 @@
                 //Je récupère toutes les données possible
                 foreach($keys as $key){
                     if(isset($_POST[$key])){
-                        if(trim($_POST[$key]) != '' && $_POST[$key] != null)
+                        if(securiser($_POST[$key]) != '' && securiser($_POST[$key]) != null)
                         {
-                            $data[$key] = $_POST[$key];
+                            $data[$key] = securiser($_POST[$key]);
                         }
                         else{
                             $erreur = true;
@@ -139,10 +139,10 @@
                     enregistrerUtilisateur($data['nom'], $data['prenom'], $data['email'], $data['pseudo'], $data['password']);
                 }
             }
-            elseif($_POST['from'] == 'connexion'){ //Je proviens du formulaire de connexion
-                connecterUtilisateur($_POST['pseudo'], $_POST['password']);
+            elseif(securiser($_POST['from']) == 'connexion'){ //Je proviens du formulaire de connexion
+                connecterUtilisateur(securiser($_POST['pseudo']), securiser($_POST['password']));
             }
-            elseif($_POST['from'] == 'contact'){ //Je proviens du formulaire de contact
+            elseif(securiser($_POST['from']) == 'contact'){ //Je proviens du formulaire de contact
                 //Liste de tous les champs du formulaire enregistrement
                 $keys[] = "email";
                 $keys[] = "sujet";
@@ -153,9 +153,9 @@
                 //Je récupère toutes les données possible
                 foreach($keys as $key){
                     if(isset($_POST[$key])){
-                        if(trim($_POST[$key]) != '' && $_POST[$key] != null)
+                        if(securiser($_POST[$key]) != '' && securiser($_POST[$key]) != null)
                         {
-                            $data[$key] = $_POST[$key];
+                            $data[$key] = securiser($_POST[$key]);
                         }
                         else{
                             $erreur = true;
@@ -169,10 +169,7 @@
 
                 //S'il y a au moins une erreur je renvois l'utilisateur à la page précédente ou la page d'accueil si pas de page précédente
                 if($erreur){
-                    $param = '?callback';
-                    if($erreurPassword){
-                        $param .= '&passwordDiff';
-                    }
+                    $param = '?callbackContact';
 
                     foreach($data as $key => $value){
                         if($key != 'password' && $key != 'password-confirm'){
@@ -181,11 +178,14 @@
                     }
 
                     if(isset($_SERVER['HTTP_REFERER'])){
-                        header('location:' . $_SERVER['HTTP_REFERER'] . $param);
+                        $url = $_SERVER['HTTP_REFERER'];
+                        //Je supprime le surplus d'attibut dans l'url
+                        $url = preg_replace('/\?.*/', '', $url);
+                        header("location:" . $url . $param);
                         exit;
                     }
                     else{
-                        header('location:enregistrement.php' . $param);
+                        header('location:index.php' . $param);
                         exit;
                     }
                     
@@ -205,13 +205,31 @@
 
                     //Redirection de l'utilisateur
                     if(isset($_SERVER['HTTP_REFERER'])){ //Sur la page d'où il a envoyé le mail
-                        header("refresh:3;url=" . $_SERVER['HTTP_REFERER']);
+                        $url = $_SERVER['HTTP_REFERER'];
+                        //Je supprime le surplus d'attibut dans l'url
+                        $url = preg_replace('/\?.*/', '', $url);
+                        header("refresh:3;url=" . $url);
                         exit;
                     }
                     else{ //Sinon sur la page d'accueil
                         header("refresh:3;url=index.php");
                         exit;
                     }
+                }
+            }
+            elseif(securiser($_POST['from']) == 'changerDroit'){ //Si je proviens du formulaire de changement de droit d'un utilisateur
+                if(isset($_POST['statut']) && isset($_POST['iduser'])){ 
+                    //On modifie le statut de l'utilisateur
+                    changerStatut($_POST['statut'], $_POST['iduser']);
+
+                    //Rediriger l'utilisateur sur la page où il se trouvait
+                    header('location:' . $_SERVER['HTTP_REFERER']);
+                    exit;
+                }
+            }
+            elseif(securiser($_POST['from']) == 'modifierArticle'){ //Si je proviens du formulaire de modification d'un article
+                if(securiser($_POST['message']) != '' && securiser($_POST['message']) != null){
+                    
                 }
             }
             else{//Je ne proviens d'aucun formulaire connu

@@ -8,17 +8,18 @@
     <title>Enregistrement</title>
 </head>
 <body>
-<header>
-        <h1>Mon mini blog</h1>
+    <header>
+        <h1><a href="index.php" style="color: black" title="Accueil du site">Mon mini blog</a></h1>
         <?php
         session_start();
 
-        if(isset($_SESSION['pseudo'])){ ?>
-            <div id="connexion" class="box">
-                <h2 style="margin: 0">Bienvenu <?php echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']; ?></h2>
+        if(isset($_SESSION['pseudo'])){
+            include('calculette.php'); ?>
+            <div id="user-box" class="box">
+                <h2 style="margin: 0">Bienvenue <?php echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']; ?></h2>
+                <a class="blue-button" href="liste_utilisateurs.php">Liste des utilisateurs</a>
                 <a class="red-button" href="envoie.php?disconnect">Se déconnecter</a>
             </div>
-            
         <?php
         }
         else{ ?>
@@ -41,11 +42,14 @@
 
     <div class="main-container">
         <div class="container">
+            <?php
+            //Afficher le liens vers la liste des articles si l'utilisateur est connecté
+            if(isset($_SESSION['pseudo'])){ ?>
+                <a href="index.php" class="button">Revenir à la liste des articles</a>
+            <?php
+            } ?>
             <h2>Formulaire d'enregistrement</h2>
-            <form action="envoie.php" method="POST">
-                <input type="hidden" name="from" value="enregistrement">
-
-                <?php
+            <?php
                     //Afficher les erreurs lorsqu'un homonyme existe déjà dans la base de données
                     if(isset($_GET['doublonPseudo'])){
                         echo '<h3 class="error-message">ERREUR - Le pseudo est déjà utilisé !</h3>';
@@ -54,7 +58,13 @@
                     if(isset($_GET['doublonEmail'])){
                         echo '<h3 class="error-message">ERREUR - Le mail est déjà utilisé !</h3>';
                     }
-                ?>
+
+                    if(isset($_GET['passwordDiff'])){
+                        echo '<h3 class="error-message">Les deux mots de passe ne sont pas identiques</h3>';
+                    }
+            ?>
+            <form action="envoie.php" method="POST">
+                <input type="hidden" name="from" value="enregistrement">
 
                 <label for="nom">Nom</label>
                 <input 
@@ -128,16 +138,11 @@
 
                 <input type="submit" value="s'enregistrer">
             </form>
-            <?php
-                    if(isset($_GET['passwordDiff'])){
-                        echo '<h3 class="error-message">Les deux mot de passe ne sont pas identique</h3>';
-                    }
-            ?>
         </div>
     </div>
 
     <footer>
-        <?php include('contact_form.html'); ?>
+        <?php include('contact_form.php'); ?>
     </footer>
 </body>
 </html>

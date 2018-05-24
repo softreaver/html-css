@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1>Mon mini blog</h1>
+    <h1><a href="index.php" style="color: black" title="Accueil du site">Mon mini blog</a></h1>
         <?php include('public_header.php'); ?>
     </header>
     
@@ -31,7 +31,7 @@
     </div>
 
     <footer>
-        <?php include('contact_form.html'); ?>
+        <?php include('contact_form.php'); ?>
     </footer>
 </body>
 </html>
