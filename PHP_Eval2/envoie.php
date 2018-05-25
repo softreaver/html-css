@@ -31,7 +31,7 @@
                     if(isset($_POST[$key])){
                         if(securiser($_POST[$key]) != '' && securiser($_POST[$key]) != null)
                         {
-                            $data[$key] = securiser($_POST[$key]);
+                            $data[$key] = ($key == 'contenu')? $_POST[$key] : securiser($_POST[$key]);
                         }
                         else{
                             $erreur = true;
@@ -50,7 +50,12 @@
                 if($erreur){
                     $param = '?callback';
                     foreach($data as $key => $value){
-                        $param .= '&' . $key . '=' . $value;
+                        if($key == 'contenu'){
+                            $_SESSION['contenu'] = $data['contenu'];
+                        }
+                        else{
+                            $param .= '&' . $key . '=' . $value;
+                        } 
                     }
 
                     header('location:form.php' . $param);
@@ -229,8 +234,41 @@
             }
             elseif(securiser($_POST['from']) == 'modifierArticle'){ //Si je proviens du formulaire de modification d'un article
                 if(securiser($_POST['message']) != '' && securiser($_POST['message']) != null){
-                    
+
+                    $date = convertirDate($_POST['date']);
+
+                    if(modifierArticle($_POST['idarticle'], $_POST['message'], $date, $_SESSION['pseudo'])){ //La modification est un succès
+                        echo "<p class=\"message\">Les modifications on bien été enregistrées</p>";
+                    }
+                    else{ //La modification est un echec
+                        echo "<p class=\"error-message\">ERREUR - Les modifications n'ont pas peu être enregistrées !</p>";
+                    }
+
+                    //Rediriger l'utilisateur sur la page où il se trouvait
+                    header('refresh:3;url=' . $_SERVER['HTTP_REFERER']);
+                    exit;
                 }
+                else{
+                    //Afficher message d'erreur
+                    echo "<p class=\"error-message\">ERREUR - Le contenu de l'article ne peut pas être vide !</p>";
+
+                    //Rediriger l'utilisateur sur la page où il se trouvait
+                    header('refresh:3;url=' . $_SERVER['HTTP_REFERER']);
+                    exit;
+                }
+            }
+            elseif(securiser($_POST['from']) == 'modifierUtilisateur'){ //Je proviens du formulaire de modification d'un utilisateur
+
+                if(modifierUtilisateur($_POST['iduser'], $_POST['pseudo'], $_POST['nom'], $_POST['prenom'], $_POST['email'])){ //La modification est un succès
+                    echo "<p class=\"message\">Les modifications on bien été enregistrées</p>";
+                }
+                else{ //La modification est un echec
+                    echo "<p class=\"error-message\">ERREUR - Les modifications n'ont pas peu être enregistrées !</p>";
+                }
+
+                //Rediriger l'utilisateur sur la page où il se trouvait
+                header('refresh:3;url=' . $_SERVER['HTTP_REFERER']);
+                exit;
             }
             else{//Je ne proviens d'aucun formulaire connu
                 //Redirection vers la page d'accueil

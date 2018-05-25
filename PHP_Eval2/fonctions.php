@@ -97,7 +97,7 @@ function publier($titre, $date, $auteur, $contenu){
 
     //Préparation de la requête
     $date = (int) convertirDate($date);
-    $requete = $connexion->prepare("INSERT INTO articles VALUES (null, :titre, :date, :auteur, :contenu)");
+    $requete = $connexion->prepare("INSERT INTO articles VALUES (null, :titre, :date, :auteur, :contenu, 0, null)");
     $requete->bindParam(":titre", $titre);
     $requete->bindParam(":date", $date);
     $requete->bindParam(":auteur", $auteur);
@@ -115,6 +115,53 @@ function publier($titre, $date, $auteur, $contenu){
         exit;
     }
 }
+
+
+//Modifier un article déjà présent dans la base de données
+function modifierArticle($id, $contenu, $date, $auteur){
+    //Création de la connexion à la base de données
+    $connexion = connexionBD();
+
+    //Préparation de la requête
+    $requete = $connexion->prepare("UPDATE articles SET contenu = :contenu, dateModif = :date, auteurModif = :auteur WHERE ID = :id");
+    $requete->bindParam(":id", $id);
+    $requete->bindParam(":contenu", $contenu);
+    $requete->bindParam(":date", $date);
+    $requete->bindParam(":auteur", $auteur);
+
+    //Envoie de la requête
+    if($requete->execute()){//La requête est un succès
+        return true;
+    }
+    else{//La requête échoue
+        return false;
+    }
+}
+
+
+//Modifier un utilisateur déjà présent dans la base de données
+function modifierUtilisateur($id, $pseudo, $nom, $prenom, $email){
+    //Création de la connexion à la base de données
+    $connexion = connexionBD();
+
+    //Préparation de la requête
+    $requete = $connexion->prepare("UPDATE users SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email WHERE ID = :id");
+    $requete->bindParam(":id", $id);
+    $requete->bindParam(":pseudo", $pseudo);
+    $requete->bindParam(":nom", $nom);
+    $requete->bindParam(":prenom", $prenom);
+    $requete->bindParam(":email", $email);
+
+    //Envoie de la requête
+    if($requete->execute()){//La requête est un succès
+        return true;
+    }
+    else{//La requête échoue
+        return false;
+    }
+}
+
+
 
 //Vérifier qu'un pseudo ne soit pas déjà enregistré dans la base de données
 //renvoie un true si l'utilisateur n'est pas déjà enregistré sinon false

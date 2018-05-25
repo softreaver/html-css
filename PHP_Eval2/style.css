@@ -9,6 +9,11 @@ h4 {
     text-align: center;
 }
 
+img {
+    max-width: 100%;
+    max-height: auto;
+}
+
 header{
     background-image: linear-gradient(white, beige);
     padding-bottom: 0.5em;
