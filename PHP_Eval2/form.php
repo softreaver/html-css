@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="ckeditor/ckeditor.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Création d'un article</title>
 </head>
 <body>
     <header>
-        <h1>Mon mini blog</h1>
+    <h1><a href="index.php" style="color: black" title="Accueil du site">Mon mini blog</a></h1>
         <?php require('private_header.php'); ?>
     </header>
 
@@ -61,9 +62,9 @@
                     id="contenu" 
                     cols="30" 
                     rows="10"
-                    maxlength="250"
-                    class="<?php if(!isset($_GET['contenu']) && isset($_GET['callback'])){ echo 'error'; } ?>"
-                    required/><?php if(isset($_GET['contenu'])){ echo $_GET['contenu'];} ?></textarea>
+                    maxlength="65530"
+                    class="ckeditor <?php if(!isset($_GET['contenu']) && isset($_GET['callback'])){ echo 'error'; } ?>"
+                    required/><?php if(isset($_SESSION['contenu'])){ echo $_SESSION['contenu']; $_SESSION['contenu'] = '';} ?></textarea>
 
                 <input type="submit" value="Envoyer l'artcile">
             </form>
@@ -71,16 +72,19 @@
     </div>
 
     <footer>
-        <?php include('contact_form.html'); ?>
+        <?php include('contact_form.php'); ?>
     </footer>
 
     <script>//Permet de récupérer la date du jour
+        //Ajout de la méthode toDateInputValue au prototype de la classe Date
         Date.prototype.toDateInputValue = (function() {
             var local = new Date(this);
+            //Heure UTC moins le décalage horaire
             local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
             return local.toJSON().slice(0, 10);
         });
 
+        // Inscrire la date du jour dans le input
         document.getElementById('date').value = new Date().toDateInputValue();
     </script>
 </body>

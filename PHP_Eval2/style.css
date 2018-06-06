@@ -9,6 +9,11 @@ h4 {
     text-align: center;
 }
 
+img {
+    max-width: 100%;
+    max-height: auto;
+}
+
 header{
     background-image: linear-gradient(white, beige);
     padding-bottom: 0.5em;
@@ -48,12 +53,12 @@ form textarea{
     margin-bottom: 1em;
 }
 
-a{
+a:not(.exept){
     text-decoration-line: none;
     color: white;
 }
 
-a:visited{
+a:visited:not(.exept){
     text-decoration-line: none;
     color: white;
 }
@@ -67,7 +72,8 @@ a:visited{
     border-radius: 25px;
     padding: 1em;
     width: 250px;
-    margin: 0 auto;
+    margin: 0.5em auto;
+    z-index: 1;
 }
 
 .blue-button{
@@ -79,7 +85,8 @@ a:visited{
     border-radius: 25px;
     padding: 1em;
     width: 250px;
-    margin: 0 auto;
+    margin: 0.5em auto;
+    z-index: 1;
 }
 
 .red-button{
@@ -90,7 +97,8 @@ a:visited{
     border-radius: 25px;
     padding: 1em;
     width: 250px;
-    margin: 0 auto;
+    margin: 0.5em auto;
+    z-index: 1;
 }
 
 .articles,
@@ -98,6 +106,7 @@ a:visited{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-content: center;
 }
 
 article:not(#single){
@@ -117,6 +126,10 @@ article:not(#single){
     border-radius: 10px;
     box-shadow: 4px 4px 3px grey;
     color: white;
+}
+
+.box *{
+    width: 100%;
 }
 
 .grey-box{
@@ -243,6 +256,18 @@ aside{
     margin: 1em auto;
 }
 
+#utilisateurs td,
+#utilisateurs th {
+    border-bottom: 2px solid;
+    margin: 0;
+}
+
+#utilisateurs tr:hover:not(.exep) {
+    background-color: rgb(166, 177, 173);
+}
+
+
+
 @media screen and (max-width: 975px){
     #calculette {
         width: 8em;
@@ -270,5 +295,9 @@ aside{
     #calculette>form{
         flex-direction: row;
         justify-content: center;
+    }
+
+    #contact>form *{
+        width: 55vw;
     }
 }

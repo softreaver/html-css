@@ -19,7 +19,7 @@
             $connexion = connexionBD();
             
             if($_POST['from'] == 'article'){
-                //Récupération de l'ID de l'article
+                
                 if(isset($_POST['idarticle'])){
                     //Récupération de l'article demandé
                     $requete = $connexion->prepare('SELECT * FROM articles WHERE ID = :id');
@@ -52,14 +52,14 @@
                 if($requete->execute()){ //La requête est un succès
                     //Confirmer la suppression
                     echo '<h3 class="message">L\'article a bien été supprimé</h3>';
-                    //Redirection automatique sur la page d'accueil
-                    header("refresh:3;url=index.php");
+                    //Redirection automatique sur la liste des articles
+                    header("refresh:3;url=liste_articles.php");
                     exit;
                 }
                 else{ //La requête a échouée
                     echo '<h3 class="error-message">ERREUR - ' . $requete->errorInfo()[2] . '</h3>';
                     //Redirection automatique sur la page précédente au bout de 5 secondes
-                    header("refresh:5;url=" . $_SERVER['HTTP_REFERER']);
+                    header("refresh:3;url=" . $_SERVER['HTTP_REFERER']);
                     exit;
                 }
             }
