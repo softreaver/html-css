@@ -1,0 +1,111 @@
+@charset "UTF-8";
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0; }
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 80vw;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: bisque; }
+  .container header {
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    -webkit-box-shadow: 0 3px 3px grey;
+    box-shadow: 0 3px 3px grey;
+    z-index: 1; }
+    .container header #research {
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      padding: 2em;
+      /* Positionne la liste des suggestions au-dessous de la zone de saisie */ }
+      .container header #research * {
+        margin-top: 1em; }
+      .container header #research #address {
+        width: 60vw; }
+      .container header #research #suggestions {
+        position: absolute;
+        border: 1px solid black;
+        left: 0;
+        top: 95%;
+        max-height: 50vh;
+        overflow-y: scroll;
+        background-color: white;
+        /* Augmente l'espacement gauche et droite des suggestions */
+        /* Modifie la couleur de la suggestion survolée par la souris */ }
+        .container header #research #suggestions .suggestion {
+          padding-left: 2px;
+          padding-right: 2px; }
+        .container header #research #suggestions .suggestion:hover {
+          background-color: #adf;
+          cursor: pointer; }
+  .container section {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    max-height: 100%; }
+    .container section #stations-list {
+      max-height: 70vh;
+      max-width: 40vw;
+      overflow-y: scroll; }
+      .container section #stations-list div {
+        overflow: hidden; }
+  .container footer {
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    -webkit-box-shadow: 0 -3px 3px grey;
+    box-shadow: 0 -3px 3px grey;
+    padding: 2em;
+    z-index: 1; }
+
+.button {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#bdb7b0), to(#a89a9a));
+  background-image: -webkit-linear-gradient(#bdb7b0, #a89a9a);
+  background-image: -o-linear-gradient(#bdb7b0, #a89a9a);
+  background-image: linear-gradient(#bdb7b0, #a89a9a);
+  border: none;
+  -webkit-box-shadow: 2px 2px 6px grey;
+  box-shadow: 2px 2px 6px grey;
+  padding: 1em;
+  max-width: 15em; }
+
+.input {
+  padding: 0.5em; }
+
+.center-content {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center; }
+
+.error {
+  color: white;
+  background-color: red;
+  -webkit-box-shadow: 3px 3px #5a5858;
+  box-shadow: 3px 3px #5a5858; }

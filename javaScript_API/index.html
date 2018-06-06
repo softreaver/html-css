@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Les stations Vlib de Toulouse</title>
+</head>
+
+<body>
+    <div class="container">
+        <header class="center-content">
+            <h1>Stations VélôToulouse</h1>
+
+            <div id="research" class="center-content">
+                <label for="address">Rechercher par adresse</label>
+                <input type="text" name="address" id="address" class="input">
+                <div id="suggestions">
+                    <!-- Suggestions d'adresse recherchées -->
+                </div> 
+            </div>
+        </header>
+
+        <section id="middle-container">
+            <div id="stations-list">
+                <!-- Contient la liste de toute les stations -->
+            </div>
+            <aside id="station-info">
+                <!-- Contient les infos de la station selectionnée -->
+            </aside>
+        </section>
+
+        <footer>
+            Copyright : MILAZZO Christopher
+        </footer>
+    </div>
+
+    <!-- Script se chargean d'envoyer les requêtes ajax GET -->
+    <script src="ajaxGet.js"></script>
+    <!-- Script principal -->
+    <script src="script.js"></script>
+</body>
+
+</html>

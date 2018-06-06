@@ -1,0 +1,113 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/////////MISE EN FORME DU DOCUMENT//////////
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: bisque;
+
+    header {
+        flex-grow: 0;
+        flex-shrink: 0;
+        box-shadow: 0 3px 3px grey;
+        z-index: 1;
+
+        #research {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 2em;
+
+            *  {
+                margin-top: 1em;
+            }
+
+            #address {
+                width: 60vw;
+            }
+
+            /* Positionne la liste des suggestions au-dessous de la zone de saisie */
+            #suggestions {
+                position: absolute;
+                border: 1px solid black;
+                left: 0;
+                top: 95%;
+                max-height: 50vh;
+                overflow-y: scroll;
+                background-color: white;
+                
+                /* Augmente l'espacement gauche et droite des suggestions */
+                .suggestion {
+                    padding-left: 2px;
+                    padding-right: 2px;
+                }
+
+                /* Modifie la couleur de la suggestion survolée par la souris */
+                .suggestion:hover {
+                    background-color: #adf;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    section {
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 0;
+        max-height: 100%;
+
+        #stations-list {
+            max-height: 70vh;
+            max-width: 40vw;
+            overflow-y: scroll;
+
+            div {
+                overflow: hidden;
+            }
+        }
+    }
+
+    footer {
+        flex-grow: 0;
+        flex-shrink: 0;
+        box-shadow: 0 -3px 3px grey;
+        padding: 2em;
+        z-index: 1;
+    }
+}
+
+
+
+////////////CLASSES DE PERSONNALISATION///////////
+
+.button {
+    background-image: linear-gradient(rgb(189, 183, 176), rgb(168, 154, 154));
+    border: none;
+    box-shadow: 2px 2px 6px grey;
+    padding: 1em;
+    max-width: 15em;
+}
+
+.input {
+    padding: 0.5em;
+}
+
+.center-content {
+    align-items: center;
+    text-align: center;
+}
+
+.error {
+    color: white;
+    background-color: red;
+    box-shadow: 3px 3px rgb(90, 88, 88);
+}
