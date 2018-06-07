@@ -27,9 +27,14 @@
             <div id="stations-list">
                 <!-- Contient la liste de toute les stations -->
             </div>
-            <aside id="station-info">
-                <!-- Contient les infos de la station selectionnée -->
-            </aside>
+            <div id="right-panel">
+                <div id="map">
+
+                </div>
+                <div id="station-info">
+                    <!-- Contient les infos de la station selectionnée -->
+                </div>
+            </div>
         </section>
 
         <footer>
@@ -41,6 +46,10 @@
     <script src="ajaxGet.js"></script>
     <!-- Script principal -->
     <script src="script.js"></script>
+    <!-- script google map -->
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJVqA5g6oUvm2ciJHWYcUZg6bVvnvUllg&callback=initMap">
+    </script>
 </body>
 
 </html>

@@ -1,21 +1,23 @@
 * {
     box-sizing: border-box;
+}
+
+/////////MISE EN FORME DU DOCUMENT//////////
+html,
+body {
+    width: 100%;
+    height: 100%;
     padding: 0;
     margin: 0;
 }
 
-/////////MISE EN FORME DU DOCUMENT//////////
-
 .container {
     display: flex;
     flex-direction: column;
-    width: 80vw;
-    height: 100vh;
-    margin: 0 auto;
-    background-color: bisque;
+    height: 100%;
 
-    header {
-        flex-grow: 0;
+    header{
+
         flex-shrink: 0;
         box-shadow: 0 3px 3px grey;
         z-index: 1;
@@ -24,11 +26,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            padding: 2em;
-
-            *  {
-                margin-top: 1em;
-            }
+            margin-bottom: 0.5em;
 
             #address {
                 width: 60vw;
@@ -38,11 +36,13 @@
             #suggestions {
                 position: absolute;
                 border: 1px solid black;
-                left: 0;
+                margin: auto;
                 top: 95%;
                 max-height: 50vh;
+                width: 60vw;
                 overflow-y: scroll;
                 background-color: white;
+                z-index: 2;
                 
                 /* Augmente l'espacement gauche et droite des suggestions */
                 .suggestion {
@@ -59,33 +59,44 @@
         }
     }
 
-    section {
-        display: flex;
+    #middle-container{
         flex-grow: 1;
-        flex-shrink: 0;
-        max-height: 100%;
+        overflow: hidden;
+        display: flex;
 
-        #stations-list {
-            max-height: 70vh;
-            max-width: 40vw;
+        #stations-list{
+            width: 300px;
+            flex-shrink: 0;
             overflow-y: scroll;
 
-            div {
-                overflow: hidden;
+            .station{
+                margin: 0.5em;
+            }
+
+            .station:hover{
+                background-color: #adf;
+                cursor: pointer;
+            }
+        }
+
+        #right-panel{
+            flex-grow: 1;
+
+            #map{
+                width: 100%;
+                height: 100%;
             }
         }
     }
 
     footer {
-        flex-grow: 0;
+        height: 100px;
         flex-shrink: 0;
         box-shadow: 0 -3px 3px grey;
         padding: 2em;
         z-index: 1;
     }
 }
-
-
 
 ////////////CLASSES DE PERSONNALISATION///////////
 
@@ -110,4 +121,14 @@
     color: white;
     background-color: red;
     box-shadow: 3px 3px rgb(90, 88, 88);
+}
+
+.open {
+    color: green;
+    font-weight: 500;
+}
+
+.closed {
+    color: red;
+    font-weight: 500;
 }

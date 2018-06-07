@@ -1,7 +1,12 @@
 @charset "UTF-8";
 * {
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+  box-sizing: border-box; }
+
+html,
+body {
+  width: 100%;
+  height: 100%;
   padding: 0;
   margin: 0; }
 
@@ -13,14 +18,8 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 80vw;
-  height: 100vh;
-  margin: 0 auto;
-  background-color: bisque; }
+  height: 100%; }
   .container header {
-    -webkit-box-flex: 0;
-    -ms-flex-positive: 0;
-    flex-grow: 0;
     -ms-flex-negative: 0;
     flex-shrink: 0;
     -webkit-box-shadow: 0 3px 3px grey;
@@ -35,20 +34,20 @@
       -webkit-box-direction: normal;
       -ms-flex-direction: column;
       flex-direction: column;
-      padding: 2em;
+      margin-bottom: 0.5em;
       /* Positionne la liste des suggestions au-dessous de la zone de saisie */ }
-      .container header #research * {
-        margin-top: 1em; }
       .container header #research #address {
         width: 60vw; }
       .container header #research #suggestions {
         position: absolute;
         border: 1px solid black;
-        left: 0;
+        margin: auto;
         top: 95%;
         max-height: 50vh;
+        width: 60vw;
         overflow-y: scroll;
         background-color: white;
+        z-index: 2;
         /* Augmente l'espacement gauche et droite des suggestions */
         /* Modifie la couleur de la suggestion survolée par la souris */ }
         .container header #research #suggestions .suggestion {
@@ -57,26 +56,33 @@
         .container header #research #suggestions .suggestion:hover {
           background-color: #adf;
           cursor: pointer; }
-  .container section {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+  .container #middle-container {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    max-height: 100%; }
-    .container section #stations-list {
-      max-height: 70vh;
-      max-width: 40vw;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+    .container #middle-container #stations-list {
+      width: 300px;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
       overflow-y: scroll; }
-      .container section #stations-list div {
-        overflow: hidden; }
+      .container #middle-container #stations-list .station {
+        margin: 0.5em; }
+      .container #middle-container #stations-list .station:hover {
+        background-color: #adf;
+        cursor: pointer; }
+    .container #middle-container #right-panel {
+      -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1; }
+      .container #middle-container #right-panel #map {
+        width: 100%;
+        height: 100%; }
   .container footer {
-    -webkit-box-flex: 0;
-    -ms-flex-positive: 0;
-    flex-grow: 0;
+    height: 100px;
     -ms-flex-negative: 0;
     flex-shrink: 0;
     -webkit-box-shadow: 0 -3px 3px grey;
@@ -109,3 +115,11 @@
   background-color: red;
   -webkit-box-shadow: 3px 3px #5a5858;
   box-shadow: 3px 3px #5a5858; }
+
+.open {
+  color: green;
+  font-weight: 500; }
+
+.closed {
+  color: red;
+  font-weight: 500; }
