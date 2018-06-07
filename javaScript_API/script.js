@@ -54,7 +54,7 @@ function upDate(){
         stationsListReady = true;
 
         // Si la carte et la liste des stations sont initialisées, on place les marqueurs sur la carte
-        if(isAllReady) initMarker();
+        if(isAllReady()) initMarker();
     
     }, function(error){
         //Afficher le message d'erreur sur la page
@@ -77,9 +77,10 @@ function suggest(event){
     // Vidage de la liste des suggestions
     suggestionsListElt.innerHTML = "";
 
+    let i = 0;
     addressList.forEach(function (address) {
     // Si valeur en cours de saisie correspond au contenu d'une adresse connu
-        if(matche(address, searchInputElt.value.toUpperCase())){
+        if(match(address, searchInputElt.value.toUpperCase())){
             //Si la liste de suggestion est invisible je la réaffiche
             if(suggestionsListElt.style.visibility === "hidden") {
                 suggestionsListElt.style.visibility = "visible";
@@ -91,16 +92,27 @@ function suggest(event){
 
             let suggestionElt = document.createElement("div");
             suggestionElt.classList.add("suggestion");
+            suggestionElt.id = i;
             suggestionElt.textContent = address;
             // Gère le lic sur une suggestion
             suggestionElt.addEventListener("click", function (event) {
                 // Remplacement de la valeur saisie par la suggestion
                 searchInputElt.value = event.target.textContent;
+
+                // Afficher l'info bulle correspondante
+                let index = parseInt(this.getAttribute('id'), 10);
+                let marker = markerList[index]
+                if(openedInfoWindow !== -1) infoWindowList[openedInfoWindow].close();
+                infoWindowList[index].open(map, marker);
+                openedInfoWindow = marker.IDInfoWindow;
+                
                 // Vidage de la liste des suggestions
                 flushSuggestions();
             });
             suggestionsListElt.appendChild(suggestionElt);
         }
+
+        i++;
     });
 }
 
@@ -137,7 +149,7 @@ function displayStations(){
  * sont tous contenu dans val1
 ***************************************/
 
-function matche(val1, val2){
+function match(val1, val2){
     let words = val2.split(' ');
     let count = 0;
 
@@ -172,7 +184,7 @@ function initMap() {
     googleMapReady = true;
 
     //On initialise les marqueurs si la carte et la listes des staions sont bien initialisés
-    if(isAllReady) initMarker();
+    if(isAllReady()) initMarker();
 }
 
 /*************************************
@@ -181,8 +193,12 @@ function initMap() {
 ***************************************/
 
 function initMarker(){
-    //Initialisation de la liste des marker
+    //Réinitialisation de la liste des marker
+    //Si une info bulle est ouverte, il faut la supprimer pour pouvoir la réinitialiser
+    if(openedInfoWindow !== -1)
+        infoWindowList[openedInfoWindow].close();
     infoWindowList = [];
+
     let i = 0;
     for(let station of stations){
         //Initialisation des données à mettre dans le markeur
@@ -197,21 +213,21 @@ function initMarker(){
             '<span class="closed">FERMÉE</span>' ;
 
         //Dernière mise à jour des données
-        let lastUpdate = "A FAIRE";
+        let lastUpdate = new Date((Date.now() - station.last_update)).getMinutes();
 
-            //Contenu de l'infobulle
+        //Contenu de l'infobulle
         let infoWindowContent = `
-        <div id="infoBulle-container">
-            <h3>${ station.name } N° ${ station.number }</h3>
-            <div id="infoBulle-content">
-                <p>${ status }</p>
-                <p>Dernière mise à jour il y a ${ lastUpdate }</p>
-                <p>Vélos dispo : ${ station.available_bikes }</p>
-                <p>Place dispo : ${ station.available_bike_stands }</p>
-                <p>Borne de paiement : ${ banking }</p>
-                <p><span class="small">lat : ${ station.position.lat } - long : ${ station.position.lng }</span></p>
-            </div>
-        </div>`;
+            <div id="infoBulle-container">
+                <h3>${ station.name } N° ${ station.number }</h3>
+                <div id="infoBulle-content">
+                    <p>${ status }</p>
+                    <p>Dernière mise à jour il y a ${ lastUpdate } minutes</p>
+                    <p>Vélos dispo : ${ station.available_bikes }</p>
+                    <p>Places dispo : ${ station.available_bike_stands }</p>
+                    <p>Borne de paiement : ${ banking }</p>
+                    <p><span class="small">lat : ${ station.position.lat } - long : ${ station.position.lng }</span></p>
+                </div>
+            </div>`;
 
         infoWindowList.push(
             new google.maps.InfoWindow({
@@ -227,6 +243,11 @@ function initMarker(){
             })
 
         markerList.push(marker);
+
+        //Si l'info bulle était ouverte avant la mise à jour des infos, on la réouvre
+        if(openedInfoWindow !== -1 && openedInfoWindow === i) infoWindowList[openedInfoWindow].open(map, marker);
+
+        //Ajouter la réaction aux cliques sur le marker en cours de création
         marker.addListener("click", function(event){
             //Fermer la fenêtre déjà ouverte
             if(openedInfoWindow !== -1) infoWindowList[openedInfoWindow].close();
@@ -234,7 +255,29 @@ function initMarker(){
             openedInfoWindow = this.IDInfoWindow;
         });
 
-        //
+        //Ajouter une réaction aux clique sur l'élément de la liste correspondant
+        document.getElementById(i).addEventListener("click", function(event){
+            let index = parseInt(this.getAttribute('id'), 10);
+            let marker = markerList[index]
+            if(openedInfoWindow !== -1) infoWindowList[openedInfoWindow].close();
+            infoWindowList[index].open(map, marker);
+            openedInfoWindow = marker.IDInfoWindow;
+        });
+
+        //Ajouter une animation sur le marqueur associé à l'élément de la liste actuellement survolé par la souris
+        document.getElementById(i).addEventListener("mouseover", function(event){
+            let index = parseInt(this.getAttribute('id'), 10);
+            let marker = markerList[index]
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        });
+
+        //Arrêter l'animation du marqueur lorsque la souris sort de l'élément
+        document.getElementById(i).addEventListener("mouseout", function(event){
+            let index = parseInt(this.getAttribute('id'), 10);
+            let marker = markerList[index]
+            marker.setAnimation(null);
+        });
+        
 
         //Incrémentation de l'itérateur
         i++;
@@ -252,7 +295,7 @@ function initMarker(){
 }
 
 /*************************************
- * r'envoie TRUE si la carte ET la
+ * R'envoie TRUE si la carte ET la
  * liste des stations sont à jours
 ***************************************/
 

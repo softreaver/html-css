@@ -123,3 +123,8 @@ body {
 .closed {
   color: red;
   font-weight: 500; }
+
+.small {
+  color: grey;
+  font-size: 0.8rem;
+  font-style: italic; }
