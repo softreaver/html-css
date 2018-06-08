@@ -26,7 +26,7 @@ window.onload = function(){
         private.year = year;
         private.month = month;
         private.date = new Date(year, month);
-        private.totalDays;
+        private.totalDays = private.date.getDay();
 
         //Const
         private.DAYS = {
@@ -77,10 +77,17 @@ window.onload = function(){
         regExpMonthParam    = /k-landar-m-[1-9]$|(1[0,2])/;                                 //Formatage : k-landar-m-XX (où XX est un nombre de 1 à 12)
         regExpYearParam     = /k-landar-y-((1[7-9]{1})|([2-9]{1}[0-9]{1})[0-9]{2}$){1}/;    //Formatage : k-landar-y-XXXX (où XXXX est l'année de 1970 à 9999)
         let monthParameter = false;
-            let yearParameter = false;
-            for(let className in element.classList){
-                
-            }
+        let yearParameter = false;
+
+        for(let className in element.classList){
+            if(regExpMonthParam.test(className))
+                monthParameter = true;
+
+            if(regExpYearParam.test(className))
+                yearParameter = true;
+        }
+
+        return monthParameter && yearParameter;
     }
 
 
