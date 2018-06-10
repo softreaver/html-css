@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nouislider.min.css">
     <title>Les meilleurs films loués sur Toulouse</title>
 </head>
 
@@ -16,23 +17,40 @@
                 <h1>Les meilleurs location de films sur Toulouse</h1>
             </a>
         </div>
-        <fieldset id="research">
-            <legend>Rechercher</legend>
-            <label for="filmTitle">Titre</label>
-            <input type="text" name="filmTitle" id="filmTitle">
-            <label for="filmRealisator">Réalisateur</label>
-            <input type="text" name="filmRealisator" id="filmRealisator">
-            <div id="titleSuggestion"></div>
-            <div id="realisatorSuggestion"></div>
-        </fieldset>
     </header>
 
     <div class="container">
         <div id="filmsList">
+            <!-- On affiche la liste des films ici -->
+        </div>
+        <div id="aside">
+            <fieldset id="research">
+                <legend>Rechercher</legend>
+                <div id="filmTilteContainer">
+                    <label for="filmTitle">Titre</label>
+                    <input type="text" name="filmTitle" id="filmTitle" class="titre">
+                    <div id="titleSuggestion"></div>
+                </div>
+                
+                <div id="filmRealisatorContainer">
+                    <label for="filmRealisator">Réalisateur</label>
+                    <input type="text" name="filmRealisator" id="filmRealisator" class="auteur">
+                    <div id="realisatorSuggestion"></div>
+                </div>
 
+                <label>nombre total de location</label>
+                <div id="slider">
+                    <!-- double slider -->
+                </div>
+                <div id="info-slider">
+                    <input type="number" id="min-slider">
+                    <input type="number" id="max-slider">
+                </div>
+            </fieldset>
         </div>
     </div>
 
+    <script src="nouislider.min.js"></script>
     <script src="ajaxGet.js"></script>
     <script src="main.js"></script>
 </body>

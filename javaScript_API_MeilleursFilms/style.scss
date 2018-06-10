@@ -1,3 +1,65 @@
 * {
     box-sizing: border-box;
 }
+
+.container {
+    display: flex;
+
+    #research {
+        display: flex;
+        flex-direction: column;
+
+        &>div {
+            display: flex;
+            flex-direction: column;
+            flex-flow: 0;
+            flex-shrink: 0;
+            width: 35vw;
+        }
+
+        #filmTilteContainer,
+        #filmRealisatorContainer {
+            position: relative;
+        }
+    
+        #titleSuggestion,
+        #realisatorSuggestion {
+            overflow-y: scroll;
+            position: absolute;
+            max-height: 50vh;
+            left: 0;
+            top: 30px;
+            background-color: white;
+            border: solid 3px black;
+            z-index: 5;
+        }
+    
+        #titleSuggestion>div:hover,
+        #realisatorSuggestion>div:hover {
+            background-color: #adf;
+            cursor: pointer;
+        }
+    }
+    
+    #filmsList {
+        flex-grow: 1;
+
+        .film-title {
+            text-decoration-line: underline;
+            font-weight: 600;
+            font-size: 1.4em;
+            color: rgb(93, 93, 214);
+        }
+
+        li {
+    
+            &:hover {
+                background-color: #adf;
+                cursor: pointer;
+            }
+        }
+    }
+    
+    
+}
+

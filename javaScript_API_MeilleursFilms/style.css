@@ -1,3 +1,59 @@
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  .container #research {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    .container #research > div {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -ms-flex-flow: 0;
+      flex-flow: 0;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+      width: 35vw; }
+    .container #research #filmTilteContainer,
+    .container #research #filmRealisatorContainer {
+      position: relative; }
+    .container #research #titleSuggestion,
+    .container #research #realisatorSuggestion {
+      overflow-y: scroll;
+      position: absolute;
+      max-height: 50vh;
+      left: 0;
+      top: 30px;
+      background-color: white;
+      border: solid 3px black;
+      z-index: 5; }
+    .container #research #titleSuggestion > div:hover,
+    .container #research #realisatorSuggestion > div:hover {
+      background-color: #adf;
+      cursor: pointer; }
+  .container #filmsList {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1; }
+    .container #filmsList .film-title {
+      -webkit-text-decoration-line: underline;
+      text-decoration-line: underline;
+      font-weight: 600;
+      font-size: 1.4em;
+      color: #5d5dd6; }
+    .container #filmsList li:hover {
+      background-color: #adf;
+      cursor: pointer; }
